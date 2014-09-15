@@ -1,0 +1,267 @@
+; Power Function Recursion
+	(define (power x n)
+		(if (= n 0)
+			1
+		(* x (power x (- n 1))))
+	)
+	;EX:
+	;1 ]=> (power 2 3)
+
+	;Value: 
+
+; Volume
+	(define (volume b w h)
+		(* b w h)
+	)
+
+	;EX:
+	;1 ]=> (volume 1 2 3)
+
+	;Value: 6
+
+; Celsius to Fahrenheit
+	(define (c2f celsius)
+		(+ (* celsius (/ 9 5)) 32)
+	)
+	;EX:
+	;1 ]=> (c2f 0)
+
+	;Value: 32
+
+	;1 ]=> (c2f 100)
+
+	;Value: 212
+
+; Cost of a cylindrical container
+	(define (costOfContainers radius length costMaterial)
+		(define (surfaceArea)
+			(+ (* (power radius 2) 3.14159) (* 2 3.14159 radius length)))
+			(* (surfaceArea) costMaterial))
+
+	;EX:
+	;1 ]=> (costOfContainers 1 1 1)
+
+	;Value: 9.424769999999999
+
+	;1 ]=> (costOfContainers 2 3 2)
+
+	;Value: 100.53088
+
+
+				; Calculate length c in triangle using pythagorean theorm
+
+				; Calculate needed final exam grade
+				;	minimum = (minimum / SCALE);
+				;	final = (final / SCALE);
+				;	current = (current / SCALE);
+				;	needed = (
+				;	score = (miniBVLUNDBERGmum - current);*/
+				;	current = (current / SCALE) * (1 - (final / SCALE));
+				;	current = current * SCALE;
+				;	needed = (minimum - current);
+				;	score = (needed / final) * SCALE;
+
+; Sum of the integers in a whole number
+	(define (sumNum x)
+		(if (< x 10)
+			x
+			(+ (remainder x 10) (sumNum(/(- x (remainder x 10))10)))
+		)
+	)
+
+; Factorial
+	(define (factorial n)
+		(if (= n 0)
+			1
+			(* n (factorial (- n 1))))
+	)
+	;EX:
+	;(factorial 6)
+
+	;Value: 720
+
+; GCD
+	(define (greatestCommonDivisor a b)
+		(cond ((= a b) a)
+			((< a b) (greatestCommonDivisor a (- b a)))
+			((> a b) (greatestCommonDivisor (- a b) b))))
+	;EX:
+	;(greatestCommonDivisor 16 12)
+
+	;Value: 4
+
+
+					; CRT
+
+					; ModExp
+
+; Remainder
+	(define (remainder a b)
+		(cond ((= a b) 0)
+			((> a b) (remainder (- a b) b))
+			((< a b) a)
+		)
+	)
+	;EX:
+	;(remainder 15 4)
+
+	;Value: 3
+
+
+; Sum from a number 'a' to 'n'
+	(define (sums a n)
+		(if(= a n) 
+			a
+			(+ a (sums (+ a 1) n))
+		)
+	)
+	
+	;EX:
+	;(sums 1 5) 
+
+	;Value: 15
+; Find minimum
+	;(define (findMin as)
+	;	(define (quickMin as bs)
+	;		(cond ((null? as) (car as))
+	;			  (else(min (car as) (findMin (cdr as))))
+	;		)
+	;	)
+	;	(quickMin (car as) (cdr as))
+	;)
+
+; And
+	(define (and a b)
+		(cond ((eqv? a #f) #f)
+			  ((eqv? b #f) #f)
+			  (else #t))
+	)
+; Or	
+	(define (or a b)
+		(if (eqv? a true) true
+			b
+		)
+	)
+; Exclusive or
+	(define (xor a b)
+		(if (eqv? a b) false
+		true
+		)
+	)
+; Not
+	(define (not a)
+		(if (eqv? a true) false
+		true
+		)
+	)
+; Imply
+	(define (imply a b)
+		(cond ((eqv? a true) b)
+			  (else true)
+		)
+	)
+; Append Finished
+	(define (append as bs)
+		(if (null? as)
+			bs
+			(cons (car as) (append (cdr as) bs))
+		)
+	)
+
+; Reverse
+	(define (reverse as)
+		(if (null? as)
+			'()
+			(cons (last as) (drop-right as 1))
+		)
+	)
+; Length (Cardinal)
+	(define (length as)
+		(if(null? as)
+			0
+			(+ 1 (length (cdr as))))
+	)
+
+; Equal lists
+	(define (equalList as bs)
+		(cond ((and (null? as) (null? bs)) true)
+			  ((eqv? (car as) (car bs)) (equalList (cdr as) (cdr bs)))
+			  (else false))
+	)
+; Member
+	(define (member a as)
+		(cond ((null? as) false)
+			  ((eqv? a (car as))true)
+			  (else (member a (cdr as)))
+		)
+	)
+; Union
+	(define (union as bs)
+		(cond ((null? as) bs)
+			  ((member (car as) bs) (union (cdr as) bs))
+			  (else (cons (car as)(union (cdr as) bs)))
+		)
+	)
+; Subset
+	(define (subset as bs)
+		(if(null? as) 
+			bs
+			(and (member (car as) bs ) (subset (cdr as) bs))
+		)
+	)
+; Intersection
+	(define (inters as bs)
+		(cond
+			((null? as) '())
+			((member (car as) bs) (cons (car as) (inters (cdr as) bs)))
+			(else (inters (cdr as) bs))
+		)
+	)
+; Difference
+	(define (differs as bs)
+		(cond
+			((null? as) '())
+			((member (car as) bs) (differs (cdr as) bs))
+			(else (cons (car as) (differs (cdr as) bs)))
+		)
+	)
+
+; Copy
+	(define (copy as)
+		(cond
+			((null? as) '())
+			(else (cons (car as) (cdr as)))
+		)
+	)
+; Remove element
+	(define (remove a as)
+		(cond
+			((null? as) '())
+			((eqv? a (car as)) (remove a (cdr as)))
+			(else (cons (car as) (remove a (cdr as))))
+		)
+	)
+; Sum a list
+	(define (sum as)
+		(cond
+			((null? as) 0)
+			(else (+(car as) (sum (cdr as)))))
+		)
+	)
+; Shorter
+	(define (shorter as bs)
+		(cond
+			((and (null? as) (null? bs)) false)
+			((null? bs) false)
+			((null? as) true)
+			(else (shorter (cdr as) (cdr bs)))
+		)
+	)
+; Substitute (put x into y's position: (a b y c) -> (a b x c))
+	;(define (sub x y as)
+	;	(cons
+	;		((null? as) '())
+	;		((eqv? y (car as)) (cons x (sub x y (cdr as))))
+	;		(else (sub x y (cdr as)))
+	;	)
+	;)

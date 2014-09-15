@@ -1,0 +1,195 @@
+Data being executed for List 1: 
+10 38 2
+9 34 6
+8 32 4
+7 32 7
+6 29 1
+5 27 5
+4 26 3
+3 23 2
+2 22 4
+1 20 5
+
+Quick Sort Method
+Timer: 0 
+Timer: 1 
+Timer: 2 
+Timer: 3 
+Timer: 4 
+Timer: 5 
+Timer: 6 
+Timer: 7 
+Timer: 8 
+Timer: 9 
+Timer: 10 
+Timer: 11 
+Timer: 12 
+Timer: 13 
+Timer: 14 
+Timer: 15 
+Timer: 16 
+Timer: 17 
+Timer: 18 
+Timer: 19 
+Timer: 20 
+Entering: 1 20 5 
+Executing: 1 20
+Timer: 21 
+Timer: 22 
+Entering: 2 22 4 
+Timer: 23 
+Entering: 3 23 2 
+Timer: 24 
+Timer: 25 
+Departure: 1 25 
+Executing: 3 25
+Timer: 26 
+Entering: 4 26 3 
+Timer: 27 
+Entering: 5 27 5 
+Departure: 3 27 
+Executing: 4 27
+Timer: 28 
+Timer: 29 
+Entering: 6 29 1 
+Timer: 30 
+Departure: 4 30 
+Executing: 6 30
+Timer: 31 
+Departure: 6 31 
+Executing: 2 31
+Timer: 32 
+Entering: 7 32 7 
+Entering: 8 32 4 
+Timer: 33 
+Timer: 34 
+Entering: 9 34 6 
+Timer: 35 
+Departure: 2 35 
+Executing: 8 35
+Timer: 36 
+Timer: 37 
+Timer: 38 
+Entering: 10 38 2 
+Timer: 39 
+Departure: 8 39 
+Executing: 10 39
+Timer: 40 
+Timer: 41 
+Departure: 10 41 
+Executing: 5 41
+Timer: 42 
+Timer: 43 
+Timer: 44 
+Timer: 45 
+Timer: 46 
+Departure: 5 46 
+Executing: 9 46
+Timer: 47 
+Timer: 48 
+Timer: 49 
+Timer: 50 
+Timer: 51 
+Timer: 52 
+Departure: 9 52 
+Executing: 7 52
+Timer: 53 
+Timer: 54 
+Timer: 55 
+Timer: 56 
+Timer: 57 
+Timer: 58 
+Timer: 59 
+Departure: 7 59 
+
+Shell Sort Method
+Timer: 0 
+Timer: 1 
+Timer: 2 
+Timer: 3 
+Timer: 4 
+Timer: 5 
+Timer: 6 
+Timer: 7 
+Timer: 8 
+Timer: 9 
+Timer: 10 
+Timer: 11 
+Timer: 12 
+Timer: 13 
+Timer: 14 
+Timer: 15 
+Timer: 16 
+Timer: 17 
+Timer: 18 
+Timer: 19 
+Timer: 20 
+Entering: 1 20 5 
+Executing: 1 20 
+Timer: 21 
+Timer: 22 
+Entering: 2 22 4 
+Timer: 23 
+Entering: 3 23 2 
+Timer: 24 
+Timer: 25 
+Departure: 1 25 
+Executing: 3 25 
+Timer: 26 
+Entering: 4 26 3 
+Timer: 27 
+Entering: 5 27 5 
+Departure: 3 27 
+Executing: 4 27 
+Timer: 28 
+Timer: 29 
+Entering: 6 29 1 
+Timer: 30 
+Departure: 4 30 
+Executing: 6 30 
+Timer: 31 
+Departure: 6 31 
+Executing: 2 31 
+Timer: 32 
+Entering: 7 32 7 
+Entering: 8 32 4 
+Timer: 33 
+Timer: 34 
+Entering: 9 34 6 
+Timer: 35 
+Departure: 2 35 
+Executing: 8 35 
+Timer: 36 
+Timer: 37 
+Timer: 38 
+Entering: 10 38 2 
+Timer: 39 
+Departure: 8 39 
+Executing: 10 39 
+Timer: 40 
+Timer: 41 
+Departure: 10 41 
+Executing: 5 41 
+Timer: 42 
+Timer: 43 
+Timer: 44 
+Timer: 45 
+Timer: 46 
+Departure: 5 46 
+Executing: 9 46 
+Timer: 47 
+Timer: 48 
+Timer: 49 
+Timer: 50 
+Timer: 51 
+Timer: 52 
+Departure: 9 52 
+Executing: 7 52 
+Timer: 53 
+Timer: 54 
+Timer: 55 
+Timer: 56 
+Timer: 57 
+Timer: 58 
+Timer: 59 
+Departure: 7 59 

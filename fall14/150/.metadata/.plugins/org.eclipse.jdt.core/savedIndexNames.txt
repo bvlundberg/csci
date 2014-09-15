@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+/home/lumpy/repo/csci/fall14/150/.metadata/.plugins/org.eclipse.jdt.core
+3927879410.index
+3224843721.index
+1955339477.index
+2511944996.index

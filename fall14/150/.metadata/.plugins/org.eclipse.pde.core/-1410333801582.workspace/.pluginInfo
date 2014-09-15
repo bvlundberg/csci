@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<bundle bundleID="336" hasExtensibleAPI="true" localization="plugin" name="Standard Widget Toolkit" project="org.eclipse.swt" provider="Eclipse.org">
+		<library name="org.eclipse.swt_3.7.2.jar"/>
+	</bundle>
+</map>

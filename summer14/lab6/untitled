@@ -1,0 +1,22 @@
+/* Lab 5 */
+
+/* Author: Brandon Lundberg
+   File Name: main.cpp
+   Purpose: Merge and Quick Sort
+   Date: 15 July 2014
+*/
+
+#include <iostream>
+using namespace std;
+void printArray(int array[]){
+	for(i = 0; i < array.size(); i++){
+		cout << array[i] << " ";
+	}
+}
+int main(){
+	int quickArray[] = {54, 26, 97, 3, 42, 97, 33, 13, 82, 73};
+	int mergeArray[] = {54, 26, 97, 3, 42, 97, 33, 13, 82, 73};
+
+
+	return 0;
+}
