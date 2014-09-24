@@ -63,60 +63,59 @@ part p = and[nontrivial p && exhaustive p && disjoint p]
 eq_to_p :: [(Int,Int)] -> [[Int]]
 eq_to_p r = norm [f a r| a <- u] where
 		f a r = [b |(a1, b) <- r, a1 == a]
-
 -- p_to_eq p == the equivalence relation associated to p
 -- (you may assume part p == True)
 p_to_eq :: [[Int]] -> [(Int,Int)]
 p_to_eq p = [(a,b)| x <- p, a <- x, b <- x, elem a x && elem b x]
 
 -- Test, on a "good" collection of cases, the equalities
---*Main> :l lab2
+--Main> :l lab2
 --[1 of 1] Compiling Main             ( lab2.hs, interpreted )
 --Ok, modules loaded: Main.
 ----- Eq(P(Eq)) -----
---*Main> p_to_eq [[1,2],[3],[4]]
+--Main> p_to_eq [[1,2],[3],[4]]
 --[(1,1),(1,2),(2,1),(2,2),(3,3),(4,4)]
---*Main> eq_to_p it
+--Main> eq_to_p it
 --[[1,2],[3],[4]]
 
---*Main> p_to_eq [[1,2,3,4]]
+--Main> p_to_eq [[1,2,3,4]]
 --[(1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(3,4),(4,1),(4,2),(4,3),(4,4)]
---*Main> eq_to_p it
+--Main> eq_to_p it
 --[[1,2,3,4]]
 
---*Main> p_to_eq [[1],[2],[3],[4]]
+--Main> p_to_eq [[1],[2],[3],[4]]
 --[(1,1),(2,2),(3,3),(4,4)]
---*Main> eq_to_p it
+--Main> eq_to_p it
 --[[1],[2],[3],[4]]
 
---*Main> p_to_eq [[1],[2,3,4]]
+--Main> p_to_eq [[1],[2,3,4]]
 --[(1,1),(2,2),(2,3),(2,4),(3,2),(3,3),(3,4),(4,2),(4,3),(4,4)]
---*Main> eq_to_p it
+--Main> eq_to_p it
 --[[1],[2,3,4]]
 
 ------ P(Eq(P)) ------
---*Main> eq_to_p [(1,1),(2,2),(3,3),(4,4)]
+--Main> eq_to_p [(1,1),(2,2),(3,3),(4,4)]
 --[[1],[2],[3],[4]]
---*Main> p_to_eq it
+--Main> p_to_eq it
 --[(1,1),(2,2),(3,3),(4,4)]
 
---*Main> eq_to_p [(1,1),(1,2),(2,1),(2,2),(1,3),(3,1),(2,3),(3,2),(3,3),(4,4)]
+--Main> eq_to_p [(1,1),(1,2),(2,1),(2,2),(1,3),(3,1),(2,3),(3,2),(3,3),(4,4)]
 --[[1,2,3],[4]]
---*Main> p_to_eq it
+--Main> p_to_eq it
 --[(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3),(4,4)]
 
---*Main> eq_to_p [(1,1),(1,2),(2,1),(2,2),(4,4),(3,3)]
+--Main> eq_to_p [(1,1),(1,2),(2,1),(2,2),(4,4),(3,3)]
 --[[1,2],[3],[4]]
---*Main> p_to_eq it
+--Main> p_to_eq it
 --[(1,1),(1,2),(2,1),(2,2),(3,3),(4,4)]
 
 ---------------------------------------------------------------------------
 -- The only thing I noticed that my functions did not take into accout was order of
 -- of the input. For example:
 
---*Main> eq_to_p [(1,1),(1,3),(3,1),(1,2),(2,1),(2,3),(3,2),(2,2),(3,3),(4,4)]
+--Main> eq_to_p [(1,1),(1,3),(3,1),(1,2),(2,1),(2,3),(3,2),(2,2),(3,3),(4,4)]
 --[[1,2,3],[1,3,2],[4]]
---*Main> p_to_eq it
+--Main> p_to_eq it
 --[(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3),(1,1),(1,3),(1,2),(3,1),(3,3),(3,2),(2,1),(2,3),(2,2),(4,4)]
 
 -- Since the pair (1,2) was after the (3,1), it made a duplicate partition, but

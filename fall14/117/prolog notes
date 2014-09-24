@@ -1,0 +1,23 @@
+(bigger elephant,horse)
+(bigger horse, cat)
+
+bigger(elephant,horse)
+true
+bigger(x.horse).
+x = elepthant
+bigger(_,horse)
+true
+bigger(_.elephant)
+false
+
+s(x,y) :- q(x,y).
+s(0,0).
+q(x,y) :- i(x),!,j(y).
+
+i(1).
+
+i(2).
+
+j(1).
+j(2).
+j(3).
