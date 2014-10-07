@@ -1,4 +1,6 @@
--- Lab 4 (including a solution to Lab 3)
+-- Brandon Lundberg --
+-- Lab 4 --
+-- 28 Sept 2014 --
 
 
 ---------------- Lab 3 Solution ----------------
@@ -101,28 +103,50 @@ ex4 = (Union (Star (Letter 'a')) (Cat (Cat (Star (Letter 'a')) (Letter 'b')) (St
 is_empty :: RE -> Bool
 is_empty Empty = True
 is_empty (Letter c) = False
-is_empty (Cat r1 r2) = is_empty r1 && is_empty r2
+is_empty (Cat r1 r2) = is_empty r1 || is_empty r2
 is_empty (Union r1 r2) = is_empty r1 && is_empty r2
 is_empty (Star r) = False
 
 -- is_one r == "[[r]] = {epsilon}" (i.e., r matches only "")
 is_one :: RE -> Bool
-is_one r = undefined
+is_one Empty = False
+is_one (Letter c) = False
+is_one (Cat r1 r2) = is_one r1 && is_one r2
+is_one (Union r1 r2) = (is_one r1 && is_one r2) || (is_empty r1 && is_one r2) || (is_one r1 && is_empty r1)
+is_one (Star r) = is_empty r || is_one r
 
 -- has_epsilon r == "epsilon `elem` [[r]]" (i.e., r matches at least "")
 has_epsilon :: RE -> Bool
-has_epsilon r = undefined
+has_epsilon Empty = False
+has_epsilon (Letter c) = False
+has_epsilon (Cat r1 r2) = has_epsilon r1 && has_epsilon r2
+has_epsilon (Union r1 r2) = has_epsilon r1 || has_epsilon r2 
+has_epsilon (Star r) = True
 
 -- is_infinite r == "[[r]] is infinite"
 is_infinite :: RE -> Bool
-is_infinite r = undefined
+is_infinite Empty = False
+is_infinite (Letter c) = False
+is_infinite (Cat r1 r2) = is_infinite r1 || is_infinite r2
+is_infinite (Union r1 r2) = is_infinite r1 || is_infinite r2
+is_infinite (Star r) = not (is_empty r) && not (is_one r)
 
 -- [[rev r]] == {reverse w | w <- [[r]]} (i.e., rev r returns a RE
 -- that matches exactly the reversals of the strings matched by r)
 rev :: RE -> RE
-rev r = undefined
+rev Empty = Empty
+rev (Letter c) = (Letter c)
+rev (Cat r1 r2) = (Cat r2 r1)
+rev (Union r1 r2) = (Union r2 r1)
+rev (Star r) = (Star r)
 
 -- [[nepart r]] = [[r]] - {epsilon} (i.e., nepart r returns a RE
 -- that does not match "" but otherwise matches the same strings as r)
 nepart :: RE -> RE
-nepart r = undefined
+nepart Empty = Empty
+nepart (Letter c) = (Letter c)
+nepart (Cat r1 r2) = if(not(has_epsilon r1 || has_epsilon r2)) then (Cat r1 r2)
+                     else undefined
+nepart (Union r1 r2) = if(not(has_epsilon r1 || has_epsilon r2)) then (Union r1 r2)
+                     else undefined
+nepart (Star r) = Empty
