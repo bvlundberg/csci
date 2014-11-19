@@ -15,8 +15,6 @@ norm = mynub . sort where
 -- Not needed, String is already defined in the Preludene
 -- type String = [Char]
 
-type Language = [String]
-
 -- Define the length and concatenation operators for String
 mylen :: String -> Int
 mylen [] = 0

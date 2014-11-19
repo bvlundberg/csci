@@ -40,3 +40,4 @@ palindrome(Xs) :-
 % false
 % because U cannot equal 1 and 3
 
+:=

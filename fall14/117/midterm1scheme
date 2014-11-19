@@ -1,0 +1,8 @@
+(define (f_iter L) (f' (car L) (cdr L) #t))
+(define (f' X L B)
+	(cond
+		((null? L) B)
+		((not (< X (car L))) (#f && (f' X (cdr L) B)))
+		(else and #t (f' X (cdr L) B))
+	)
+)

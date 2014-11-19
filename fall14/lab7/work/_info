@@ -1,0 +1,554 @@
+m255
+K3
+13
+cModel Technology
+dC:\Users\lcoe-lab\Desktop\lab7
+Ealu1
+Z0 w1415148079
+Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z3 dC:\Users\csmlab\Desktop\lab7
+Z4 8C:/Users/csmlab/Desktop/lab7/ALU1.vhd
+Z5 FC:/Users/csmlab/Desktop/lab7/ALU1.vhd
+l0
+L4
+VFaYh6_0:HNX>KoR5a]j:a0
+Z6 OV;C;10.1e;51
+32
+Z7 !s108 1415148120.346000
+Z8 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/ALU1.vhd|
+Z9 !s107 C:/Users/csmlab/Desktop/lab7/ALU1.vhd|
+Z10 o-work work -O0
+Z11 tExplicit 1
+!s100 lMGoR[kdfYP6MffRJ^S1T1
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 4 alu1 0 22 FaYh6_0:HNX>KoR5a]j:a0
+l64
+L15
+VI=]`nX]2]@W9zZH3Ye9AY3
+R6
+32
+R7
+R8
+R9
+R10
+R11
+!s100 4MR>OoQOUTVAEWjzfbzdR2
+!i10b 1
+Ealu1ovf
+Z12 w1415148079
+R1
+R2
+R3
+Z13 8C:/Users/csmlab/Desktop/lab7/ALU1OVF.vhd
+Z14 FC:/Users/csmlab/Desktop/lab7/ALU1OVF.vhd
+l0
+L4
+Vd>8Z<fzL1OMjiii;laJL_3
+R6
+32
+Z15 !s108 1415148120.405000
+Z16 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/ALU1OVF.vhd|
+Z17 !s107 C:/Users/csmlab/Desktop/lab7/ALU1OVF.vhd|
+R10
+R11
+!s100 VJQaA20:jQXBOfLHi=70Z1
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 7 alu1ovf 0 22 d>8Z<fzL1OMjiii;laJL_3
+l76
+L16
+VKA2`TV>[9>PVLAzQ=KP<`0
+R6
+32
+R15
+R16
+R17
+R10
+R11
+!s100 AKGBg>CWn79]iDC5`@9hm2
+!i10b 1
+Ealu8
+R12
+R1
+R2
+R3
+Z18 8C:/Users/csmlab/Desktop/lab7/ALU8.vhd
+Z19 FC:/Users/csmlab/Desktop/lab7/ALU8.vhd
+l0
+L4
+V`TYlTCfzKRcZM=;AOjDc<1
+R6
+32
+Z20 !s108 1415148120.465000
+Z21 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/ALU8.vhd|
+Z22 !s107 C:/Users/csmlab/Desktop/lab7/ALU8.vhd|
+R10
+R11
+!s100 QHE9?:nPYQUkD8c7mBLA[1
+!i10b 1
+Astruct
+R1
+R2
+Z23 DEx4 work 4 alu8 0 22 `TYlTCfzKRcZM=;AOjDc<1
+l48
+L15
+V>k6QV0KH`bCFRQl1]G^HN0
+R6
+32
+R20
+R21
+R22
+R10
+R11
+!s100 >Zc5USDOo]17bd^Z0LflN2
+!i10b 1
+Ealu8_tb
+Z24 w1415149726
+R1
+R2
+R3
+Z25 8C:/Users/csmlab/Desktop/lab7/ALU8_TB.vhd
+Z26 FC:/Users/csmlab/Desktop/lab7/ALU8_TB.vhd
+l0
+L4
+VQCLK:Mz0@_Pk6]Vz[FQWO2
+!s100 UoRJ]5PPz0:a1zbDNJ_0R3
+R6
+32
+!i10b 1
+Z27 !s108 1415149734.384000
+Z28 !s90 -reportprogress|300|-work|work|C:/Users/csmlab/Desktop/lab7/ALU8_TB.vhd|
+Z29 !s107 C:/Users/csmlab/Desktop/lab7/ALU8_TB.vhd|
+R10
+R11
+Atb
+R1
+R2
+Z30 DEx4 work 7 alu8_tb 0 22 QCLK:Mz0@_Pk6]Vz[FQWO2
+l25
+L7
+VVB6U_B=U37@O@V665kAFj2
+!s100 `fA1<R^AjPJDzZIgAn20O0
+R6
+32
+!i10b 1
+R27
+R28
+R29
+R10
+R11
+Ealu_tb
+R12
+R1
+R2
+R3
+Z31 8C:/Users/csmlab/Desktop/lab7/ALU_TB.vhd
+Z32 FC:/Users/csmlab/Desktop/lab7/ALU_TB.vhd
+l0
+L4
+V=bQO2bIl1ih]n;BLYG>li3
+R6
+32
+Z33 !s108 1415148120.277000
+Z34 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/ALU_TB.vhd|
+Z35 !s107 C:/Users/csmlab/Desktop/lab7/ALU_TB.vhd|
+R10
+R11
+!s100 47oQ?F0iEHNCG<Z@b]BR00
+!i10b 1
+Atb
+R1
+R2
+DEx4 work 6 alu_tb 0 22 =bQO2bIl1ih]n;BLYG>li3
+l22
+L7
+V]i8oN]AHI4USKeSgl^QIN3
+R6
+32
+R33
+R34
+R35
+R10
+R11
+!s100 PfDAW80gY=jgMZ>IH249X1
+!i10b 1
+Eand_gate
+R12
+R1
+R2
+R3
+Z36 8C:/Users/csmlab/Desktop/lab7/AND_gate.vhd
+Z37 FC:/Users/csmlab/Desktop/lab7/AND_gate.vhd
+l0
+L4
+VDb^T^GAdlI46MKnX@W9BR0
+R6
+32
+Z38 !s108 1415148120.611000
+Z39 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/AND_gate.vhd|
+Z40 !s107 C:/Users/csmlab/Desktop/lab7/AND_gate.vhd|
+R10
+R11
+!s100 IF[Jn2DK>XNmobQ0UUY9]3
+!i10b 1
+Abehav
+R1
+R2
+DEx4 work 8 and_gate 0 22 Db^T^GAdlI46MKnX@W9BR0
+l12
+L11
+V7GO9fHJTR>TM`oV^;>nV>1
+R6
+32
+R38
+R39
+R40
+R10
+R11
+!s100 6C@BWK^k=o`6Z^7?^U>=U3
+!i10b 1
+Ccfg_tb
+aTB
+eALU8_TB
+R23
+DAx4 work 7 alu8_tb 2 tb 22 VB6U_B=U37@O@V665kAFj2
+R1
+R2
+R30
+R24
+R3
+R25
+R26
+l0
+L236
+VA9IH4SK`2Td>C7e2FL:I63
+!s100 Q0T@<4C^W42TBbR@4icTB3
+R6
+32
+!i10b 0
+R27
+R28
+R29
+R10
+R11
+Edecoder_2
+Z41 w1415148078
+R1
+R2
+R3
+Z42 8C:/Users/csmlab/Desktop/lab7/2_bit_decoder.vhd
+Z43 FC:/Users/csmlab/Desktop/lab7/2_bit_decoder.vhd
+l0
+L4
+V_zW[OXaef6UMNcc`DSSm13
+R6
+32
+Z44 !s108 1415148119.990000
+Z45 !s90 -reportprogress|300|-work|work|C:/Users/csmlab/Desktop/lab7/2_bit_decoder.vhd|
+Z46 !s107 C:/Users/csmlab/Desktop/lab7/2_bit_decoder.vhd|
+R10
+R11
+!s100 OK0L_]Z<9i:211E=caJ^o2
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 9 decoder_2 0 22 _zW[OXaef6UMNcc`DSSm13
+l30
+L13
+VbeL0T_4WJXa^4f<IE7?Q<2
+R6
+32
+R44
+R45
+R46
+R10
+R11
+!s100 HF@]`]IkD]B8F0jnLYEMh1
+!i10b 1
+Efull_adder1
+R12
+R1
+R2
+R3
+Z47 8C:/Users/csmlab/Desktop/lab7/Full_Adder1.vhd
+Z48 FC:/Users/csmlab/Desktop/lab7/Full_Adder1.vhd
+l0
+L4
+VlRAZbOe4k57_EEXefU9CY0
+R6
+32
+Z49 !s108 1415148120.671000
+Z50 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/Full_Adder1.vhd|
+Z51 !s107 C:/Users/csmlab/Desktop/lab7/Full_Adder1.vhd|
+R10
+R11
+!s100 JNMPzG]KD8=KajIY9ALQG1
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 11 full_adder1 0 22 lRAZbOe4k57_EEXefU9CY0
+l39
+L13
+V]hzGCGJNV7NhJ8Go3NO4h0
+R6
+32
+R49
+R50
+R51
+R10
+R11
+!s100 DB3M_gHYz7fzUk`BULDFa3
+!i10b 1
+Efull_adder1_tb
+R12
+R1
+R2
+R3
+Z52 8C:/Users/csmlab/Desktop/lab7/Full_Adder1_TB.vhd
+Z53 FC:/Users/csmlab/Desktop/lab7/Full_Adder1_TB.vhd
+l0
+L4
+V8Cli:dW86PhKY0V[zC`?82
+R6
+32
+Z54 !s108 1415148120.733000
+Z55 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/Full_Adder1_TB.vhd|
+Z56 !s107 C:/Users/csmlab/Desktop/lab7/Full_Adder1_TB.vhd|
+R10
+R11
+!s100 ceRXNBE7Ia2K85JAQ>Hfk0
+!i10b 1
+Atb
+R1
+R2
+DEx4 work 14 full_adder1_tb 0 22 8Cli:dW86PhKY0V[zC`?82
+l21
+L7
+VJ]H^^MN:QN2H_zG]g4@nV2
+R6
+32
+R54
+R55
+R56
+R10
+R11
+!s100 BJ5VJ:G@`H:I^EJ4IPQXg3
+!i10b 1
+Emux_2x1
+Z57 w1415148433
+R1
+R2
+R3
+Z58 8C:/Users/csmlab/Desktop/lab7/2x1_MUX.vhd
+Z59 FC:/Users/csmlab/Desktop/lab7/2x1_MUX.vhd
+l0
+L4
+VB45d`c2mGZz@dmhW4?B_F3
+R6
+32
+Z60 !s108 1415148444.760000
+Z61 !s90 -reportprogress|300|-work|work|C:/Users/csmlab/Desktop/lab7/2x1_MUX.vhd|
+Z62 !s107 C:/Users/csmlab/Desktop/lab7/2x1_MUX.vhd|
+R10
+R11
+!s100 ^Cg[=XD0VIMf2M>^^I0dO2
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 7 mux_2x1 0 22 B45d`c2mGZz@dmhW4?B_F3
+l40
+L13
+VP7W6AD_g`Zl]mHPNOELE11
+R6
+32
+R60
+R61
+R62
+R10
+R11
+!s100 3Zb;>ZmYL:R42D45INWCR3
+!i10b 1
+Emux_4x1
+R41
+R1
+R2
+R3
+Z63 8C:/Users/csmlab/Desktop/lab7/4x1_MUX.vhd
+Z64 FC:/Users/csmlab/Desktop/lab7/4x1_MUX.vhd
+l0
+L4
+VlV_ME7?;ED5<k=Yn2SS1O2
+R6
+32
+Z65 !s108 1415148120.140000
+Z66 !s90 -reportprogress|300|-work|work|C:/Users/csmlab/Desktop/lab7/4x1_MUX.vhd|
+Z67 !s107 C:/Users/csmlab/Desktop/lab7/4x1_MUX.vhd|
+R10
+R11
+!s100 Q07GFICEXBfVXa2ROfmCG0
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 7 mux_4x1 0 22 lV_ME7?;ED5<k=Yn2SS1O2
+l45
+L14
+V1SiTO1f2SZ4NMQcE?W[R82
+R6
+32
+R65
+R66
+R67
+R10
+R11
+!s100 Qz?=>n@8TWJo@i52?KTzn0
+!i10b 1
+Emux_4x1_tb
+R12
+R1
+R2
+R3
+Z68 8C:/Users/csmlab/Desktop/lab7/4x1_MUX_TB.vhd
+Z69 FC:/Users/csmlab/Desktop/lab7/4x1_MUX_TB.vhd
+l0
+L4
+VHf?[8f5U_EXcA]U0k;Oh50
+R6
+32
+Z70 !s108 1415148120.201000
+Z71 !s90 -reportprogress|300|-work|work|C:/Users/csmlab/Desktop/lab7/4x1_MUX_TB.vhd|
+Z72 !s107 C:/Users/csmlab/Desktop/lab7/4x1_MUX_TB.vhd|
+R10
+R11
+!s100 mCGV04dYWi<AaOzBg7oDE1
+!i10b 1
+Atb
+R1
+R2
+DEx4 work 10 mux_4x1_tb 0 22 Hf?[8f5U_EXcA]U0k;Oh50
+l22
+L7
+Vc=K`iGcHH76VaXP]?9IeD3
+R6
+32
+R70
+R71
+R72
+R10
+R11
+!s100 cM3eZg?zOYBR8e[WOde@P1
+!i10b 1
+Enot_gate
+R12
+R1
+R2
+R3
+Z73 8C:/Users/csmlab/Desktop/lab7/NOT_gate.vhd
+Z74 FC:/Users/csmlab/Desktop/lab7/NOT_gate.vhd
+l0
+L4
+V0Z3lmf_Ogke[LM[FIDbdU2
+R6
+32
+Z75 !s108 1415148120.800000
+Z76 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/NOT_gate.vhd|
+Z77 !s107 C:/Users/csmlab/Desktop/lab7/NOT_gate.vhd|
+R10
+R11
+!s100 ?m8GD`8MgE1DEjJ<T3<Oa1
+!i10b 1
+Abehav
+R1
+R2
+DEx4 work 8 not_gate 0 22 0Z3lmf_Ogke[LM[FIDbdU2
+l11
+L10
+VYW7?3KU[PWcnKiH`@j9M40
+R6
+32
+R75
+R76
+R77
+R10
+R11
+!s100 A?z3CVIZG<bohIL5h_n;S1
+!i10b 1
+Eor_gate
+R12
+R1
+R2
+R3
+Z78 8C:/Users/csmlab/Desktop/lab7/OR_gate.vhd
+Z79 FC:/Users/csmlab/Desktop/lab7/OR_gate.vhd
+l0
+L4
+V]BaL35mG`TObnZAfjTaR=1
+R6
+32
+Z80 !s108 1415148120.856000
+Z81 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/OR_gate.vhd|
+Z82 !s107 C:/Users/csmlab/Desktop/lab7/OR_gate.vhd|
+R10
+R11
+!s100 4J[NQVgZ9Eigl<>41@`T82
+!i10b 1
+Abehav
+R1
+R2
+DEx4 work 7 or_gate 0 22 ]BaL35mG`TObnZAfjTaR=1
+l12
+L11
+VAFZXQhJYMP0:QT@mDj>>02
+R6
+32
+R80
+R81
+R82
+R10
+R11
+!s100 Z0KE1<nHz>=]l;M@?Iaob3
+!i10b 1
+Exor_gate
+R12
+R1
+R2
+R3
+Z83 8C:/Users/csmlab/Desktop/lab7/XOR_gate.vhd
+Z84 FC:/Users/csmlab/Desktop/lab7/XOR_gate.vhd
+l0
+L4
+VRQDjVD?_`>F79Czh58a[d3
+R6
+32
+Z85 !s108 1415148120.919000
+Z86 !s90 -reportprogress|30|-work|work|C:/Users/csmlab/Desktop/lab7/XOR_gate.vhd|
+Z87 !s107 C:/Users/csmlab/Desktop/lab7/XOR_gate.vhd|
+R10
+R11
+!s100 UYo:FkJOOBNLCMnX:ak<30
+!i10b 1
+Astruct
+R1
+R2
+DEx4 work 8 xor_gate 0 22 RQDjVD?_`>F79Czh58a[d3
+l36
+L11
+V^fgf?m02o8e>QR7O`V;Dn0
+R6
+32
+R85
+R86
+R87
+R10
+R11
+!s100 Ez4H[DZ;^Ub9Q>hBfbm[T2
+!i10b 1

@@ -172,11 +172,22 @@ unionFSM m1@(qs1, s1, fs1, ts1) m2@(qs2, s2, fs2, ts2) = ((qs1 >< qs2), (s1, s2)
 
 -- Machine that accepts the concatenation of the languages accepted by m1 and m2
 catFSM :: (Ord a, Ord b) => FSM a -> FSM b -> FSM (a, [b])
-catFSM = undefined
+catFSM  m1@(qs1, s1, fs1, ts1) m2@(qs2, s2, fs2, ts2) = (qs, s, fs, ts) where
+                                                          qs = [(q1,x)|q1 <- qs1, x <- power qs2, or (notElem q1 fs1) (elem s2 x)]
+                                                          s = if elem q1 fs1 then (q1, q2)
+                                                              else (q1, 0)
+                                                          fs = [qf | qf <- qs, overlap (snd qf) fs2]
+                                                          ts = undefined --[((x1,x2), a, (delta(m1, x1, a), z)) | a <- sigma, x1 <- qs1, x2 <- qs2, ]
 
 -- Machine that accepts the Kleene star of the language accepted by m1
 starFSM :: Ord a => FSM a -> FSM [a]
-starFSM = undefined
+starFSM  m@(qs1, s1, fs1, ts1) = (qs, s, fs, ts) where
+                                  qs = [x | x <- power qs1, overlap x fs1]
+                                  s = 0
+                                  fs = [x | x <- qs, elem x fs1]
+                                  ts = ts1 ++  ts2
+                                  ts1 = [(x1,a,delta(s1, a)) | a <- sigma, x1 <- qs, x1 == 0]
+                                  ts2 = undefined -- [(x1,a,delta(m, x1,a)) | ]
 
 -- Convert a regular expression to a finite state machine
 conv :: RegExp a -> FSM a
@@ -192,8 +203,7 @@ conv (Star r1) = starFSM (conv r1)
 -- Build a mimimal machine for this language (not the one using catFSM)
 -- Use any type you want in place of Int for your states
 stringFSM :: [Char] -> FSM Int
-stringFSM = undefined
-
+stringFSM w = ([0, 1], 0, [1], [(0, x, 1) | x <- w])
 
 -------------------------------------------------------------------------
 -- Bonus feature:  a much more frugal conversion function that eliminates
