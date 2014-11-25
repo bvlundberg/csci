@@ -153,16 +153,21 @@ deriv c (Cat' [r1]) = deriv c r1
 deriv c (Cat' (r1:rest)) = if byp r1 then Union' ([(Cat' ([(deriv c r1)] ++ rest))] ++ [deriv c (Cat' rest)]) else Cat' ([(deriv c r1)] ++ rest)
 deriv c (Star' r1) = Cat' ([(deriv c r1)] ++ [Star' r1])
 
+-- Find the list of all (simplified) derivatives of a regular expression
+all_derivs r = stable $ iterate close ([r], []) where
+  stable ((fr,rs):rest) = if null fr then rs else stable rest
+  close (fr, rs) = (fr', rs') where  
+    rs' = fr ++ rs
+    fr' = nub $ filter (`notElem` rs') (concatMap step fr)
+    step r = map (\a -> deriv a r) sigma
+    
 -- Convert an RE' to an FSM using the derivative construction
 conv :: RE' -> FSM RE'
-conv r = undefined
---conv Zero = emptyFSM
---conv One = undefined
---conv (Letter' c) = letterFSM c
---conv (Union' (r:rest)) = unionFSM (conv r) (conv rest)
---conv (Cat' (r:rest)) = catFSM (conv r) (conv rest)
---conv (Star' r) = starFSM (conv r)
-
+conv r = (qs', s', fs', ts') where
+  qs' = all_derivs r
+  s' = r
+  fs' = [q | q <- qs, byp q]
+  ts' = [(q, a, deriv a q) | q <- qs', a <- sigma]
 
 -- Change the states of an FSM from an equality type to Int
 intify :: Eq a => FSM a -> FSM Int
