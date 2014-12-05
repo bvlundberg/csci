@@ -60,12 +60,32 @@ intToBinPositive :: Int -> [Int]
 intToBinPositive 0 = []
 intToBinPositive x = res : intToBinPositive (div x 2) where
 	res = if even x then 0 else 1
+		
+checkTag :: [Int] -> [Int] -> Bool
+checkTag x fromCache = if (take 3 x == take 3) fromCache then True else False 
+
+insertToCache :: [Int]
+
+
 -- the lenIntToBin function takes changes the binary number calculated in the intToBinPositive
 -- and makes it 32 bits long. Since we are only working with postive integers, zeros are added
 -- to the front until it has a length of 32
 
 initializeStructureNonZero :: Int -> Int -> [[Int]]
 initializeStructureNonZero size dataOffset = intToBinPositive (size+dataOffset) : initializeStructureNonZero (size-1) dataOffset
+
+addValidBit :: [[Int]] -> [(Int,[Int])]
+addValidBit (x:xs) = (0,x): addValidBit xs
+
+registers :: [[Int]]
+registers = initializeStructureZero 8
+
+cache = [(Int, [Int])]
+cache = addValidBit $ initializeStructureZero 16
+
+mainmemory :: [[Int]]
+mainmemory = initializeStructureNonZero 128 5
+
 
 
 main = do 
