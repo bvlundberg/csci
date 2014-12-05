@@ -36,13 +36,37 @@ import Data.List ()
 
 --initializeRegisterContents 
 	  
-replaceNthElem :: Int -> [Int] -> [[Int] -> [[Int]]
+replaceNthElem :: Int -> [Int] -> [[Int]] -> [[Int]]
 replaceNthElem 0 a (x:xs) = a:xs
 replaceNthElem n a (x:xs) = x:replaceNthElem (n-1) a xs
 
 stringToInts :: [Char] -> [Int]
 stringToInts [] = []
 stringToInts (x:xs) = (read [x] :: Int):stringToInts xs
+
+orList :: [Int] -> Int
+orList [] = 0
+orList (x:xs) = if (x == 1) then 1
+				else orList xs
+
+initializeToZero :: [Int]
+initializeToZero = [0,0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+initializeStructureZero :: Int -> [[Int]]
+initializeStructureZero 0 = []
+initializeStructureZero size = initializeToZero:initializeStructureZero (size-1)
+
+intToBinPositive :: Int -> [Int]
+intToBinPositive 0 = []
+intToBinPositive x = res : intToBinPositive (div x 2) where
+	res = if even x then 0 else 1
+-- the lenIntToBin function takes changes the binary number calculated in the intToBinPositive
+-- and makes it 32 bits long. Since we are only working with postive integers, zeros are added
+-- to the front until it has a length of 32
+
+initializeStructureNonZero :: Int -> Int -> [[Int]]
+initializeStructureNonZero size dataOffset = intToBinPositive (size+dataOffset) : initializeStructureNonZero (size-1) dataOffset
+
 
 main = do 
 	instruction <- readFile "p3inputline.txt"
