@@ -33,6 +33,7 @@
 		- 	the running input/output is shown at the end of the file
 ------------------------------------------------------------------------------------}
 import Data.List ()
+--import Data.List.Split
 
 --initializeRegisterContents 
 	  
@@ -43,6 +44,10 @@ replaceNthElem n a (x:xs) = x:replaceNthElem (n-1) a xs
 stringToInts :: [Char] -> [Int]
 stringToInts [] = []
 stringToInts (x:xs) = (read [x] :: Int):stringToInts xs
+
+stringToIntsList :: [[Char]] -> [[Int]]
+stringToIntsList [] = []
+stringToIntsList (x:xs) = stringToInts x : stringToIntsList xs
 
 orList :: [Int] -> Int
 orList [] = 0
@@ -60,11 +65,15 @@ intToBinPositive :: Int -> [Int]
 intToBinPositive 0 = []
 intToBinPositive x = res : intToBinPositive (div x 2) where
 	res = if even x then 0 else 1
-		
-checkTag :: [Int] -> [Int] -> Bool
-checkTag x fromCache = if (take 3 x == take 3) fromCache then True else False 
 
-insertToCache :: [Int]
+binToIntPositive :: Int -> [Int] -> Int
+binToIntPositive n [] = 0
+binToIntPositive n (x:xs) = ((2^n)*x) + binToIntPositive (n+1) xs  
+		
+--checkTag :: [Int] -> [Int] -> Bool
+--checkTag x fromCache = if (take 3 x == take 3) fromCache then True else False 
+
+--insertToCache :: [Int]
 
 
 -- the lenIntToBin function takes changes the binary number calculated in the intToBinPositive
@@ -80,20 +89,36 @@ addValidBit (x:xs) = (0,x): addValidBit xs
 registers :: [[Int]]
 registers = initializeStructureZero 8
 
-cache = [(Int, [Int])]
-cache = addValidBit $ initializeStructureZero 16
+--cache = [(Int, [Int])]
+--cache = addValidBit $ initializeStructureZero 16
 
 mainmemory :: [[Int]]
 mainmemory = initializeStructureNonZero 128 5
 
 
 
-main = do 
-	instruction <- readFile "p3inputline.txt"
-	let	op = take 6 instruction
-	  	postOp = drop 7 instruction
-	  	rs = take 5 postOp
-	  	postRs = drop 6 postOp
-	  	rt = take 5 postRs
-	  	offset = drop 6 postRs
-	print $ stringToInts (op++rs++rt++offset)
+{-
+		instruction <- readFile "p3input.txt"
+		getInstructions instructions
+
+-}
+
+checkOpCode :: [Int] -> Bool
+checkOpCode instruction = if (take 6 instruction == (reverse (intToBinPositive 35)))then True 
+						  else False
+getBaseRegister :: [Int] -> Int
+getBaseRegister instruction = ((binToIntPositive 0 (reverse (take 5 (drop 11 instruction)))) - 16) 
+
+		
+
+fileName :: [Char]
+fileName = "p3input.txt"
+
+getInstructions :: [Char] -> [[Int]]
+getInstructions file = instructionSet where
+	instructionLines = lines file
+	instructionSet = stringToIntsList $ map (filter (/= ' ')) instructionLines
+
+followInstructions :: [[Int]] -> [[Int]]
+followInstructions xs = undefined
+
