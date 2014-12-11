@@ -1,4 +1,3 @@
-{-# LANGUAGE TypeSynonymInstances#-}
 {-
 	Author: Brandon Lundberg
 	File Name: simproject3.hs
@@ -25,36 +24,24 @@
 		  	to be loaded from a data file. The data file contains 32 bit integers (separared by spaces)
 		  	that respresent individual instructions
 		-	loading the file is done using the following procedure:
-			1.
-			2.
-			3.
+			1. instruction <- readFile fileName
+			2. getInstructions instruction
+			3. followIInstructions it (registers, cache, mainmemory)
 		- 	the output is in the form of 3 lists, which contain the contents of the data structures
-			described above
-			 string value, "result"
+			described above where
+				- the register contents are printed first, in the form of 8 32 bit integers
+				- the cache is printing as 8 lists, which is broken down into 2 sets
+					- the first integer is a lru bit, where it contains a 1 if that block was the
+					  most recently used
+					- the second integer contains the valid bit
+					- the third integer contains the tag
+					- the fourth set contains the data in that block of the set
+				- main memory is the final output, in the form of 128 32 bit integers
 		- 	the running input/output is shown at the end of the file
 ------------------------------------------------------------------------------------}
 ---------------------------------- Helper Functions ----------------------------------------
 import Data.List ()
-import Debug.Trace (trace)
 
-type Cache = (Int, Int, Int, [Int], Int, Int, Int, [Int])
-instance Show Cache where    -- use precedence to minimize parentheses
-  show (history1, valid1, tag1, data1, history2, valid2, tag2, data2) = "History 1: " ++ show history1 ++ " Valid Bit 1: " ++ show valid1 ++ " Tag 1: " ++ show tag1 ++ " Data1 : " ++ show data1 ++ "\n" ++ "History 2: " ++ show history2 ++ " Valid Bit 2: " ++ show valid2 ++ " Tag 2: " ++ show tag2 ++ " Data 2: " ++ show data2 ++ "\n"
-type Caches = [(Int, Int, Int, [Int], Int, Int, Int, [Int])]
-instance Show Caches where
-  show [] = ""
-  show (x:xs) = show x ++ show xs
-type Memory = [Int]
-type MainMemory = [[Int]]
-instance (Show MainMemory) where
-  show [] = ""
-  show (x:xs) = "Main Memory: \n" ++ show x ++ "\n" ++ show xs
-type Register = [Int]
-type Registers = [[Int]]
-instance (Show Registers) where
-  show [] = ""
-  show (x:xs) = "Registers: \n" ++ show x ++ "\n" ++ show xs
---import Data.List.Split
 -- nthel (nth element)
 -- Takes the nth element from a list
 nthel :: Int -> [[Int]] -> [Int]
@@ -62,21 +49,21 @@ nthel n xs = last (take n xs)
 
 -- nthelCache
 -- same as the previous functions, but the data type is different, so a different output is needed
-nthelCache :: Int -> Caches -> Cache
+nthelCache :: Int -> [(Int, Int, Int, [Int], Int, Int, Int, [Int])] -> (Int, Int, Int, [Int], Int, Int, Int, [Int])
 nthelCache n xs = last (take n xs)
 
 -- the next 3 functions all replace a particular element in one of the structures
 -- they all use recursion with a counter to find the element to replace and fill it with the
 -- correct new element
-replaceNthElemRegister :: Int -> Register -> Registers -> Registers
+replaceNthElemRegister :: Int -> [Int] -> [[Int]] -> [[Int]]
 replaceNthElemRegister 0 a (x:xs) = a:xs
 replaceNthElemRegister n a (x:xs) = x:replaceNthElemRegister (n-1) a xs
 
-replaceNthElemMemory :: Int -> Memory -> MainMemory -> MainMemory
+replaceNthElemMemory :: Int -> [Int] -> [[Int]] -> [[Int]]
 replaceNthElemMemory 0 a (x:xs) = a:xs
 replaceNthElemMemory n a (x:xs) = x:replaceNthElemMemory (n-1) a xs
 
-replaceNthElemCache :: Int -> Cache -> Caches -> Caches
+replaceNthElemCache :: Int -> (Int, Int, Int, [Int], Int, Int, Int, [Int]) -> [(Int, Int, Int, [Int], Int, Int, Int, [Int])] -> [(Int, Int, Int, [Int], Int, Int, Int, [Int])]
 replaceNthElemCache 0 a (x:xs) = a:xs
 replaceNthElemCache n a (x:xs) = x:replaceNthElemCache (n-1) a xs
 
@@ -92,6 +79,7 @@ lenIntToBin (x:xs) | length (x:xs) == 32 = (x:xs)
 stringToInts :: [Char] -> [Int]
 stringToInts [] = []
 stringToInts (x:xs) = (read [x] :: Int):stringToInts xs
+
 -- stringToIntsList
 -- changes a list of strings to a list of list of integers, using the stringToInts function
 stringToIntsList :: [[Char]] -> [[Int]]
@@ -119,36 +107,29 @@ binToIntPositive n (x:xs) = ((2^n)*x) + binToIntPositive (n+1) xs
 
 -- the following 3 functions are used help create the registers, cache and main memory
 -- they create as many elements of that particular structure as desired by the user
-initializeRegisterZero :: Int -> Registers
+initializeRegisterZero :: Int -> [[Int]]
 initializeRegisterZero 0 = []
 initializeRegisterZero size = initializeToZero:initializeRegisterZero (size-1)
 
-initializeMemoryNonZero :: Int -> Int -> MainMemory
+initializeMemoryNonZero :: Int -> Int -> [[Int]]
 initializeMemoryNonZero 0 dataOffset = [lenIntToBin (reverse (intToBinPositive (dataOffset)))]
 initializeMemoryNonZero size dataOffset = lenIntToBin (reverse (intToBinPositive (size+dataOffset))) : initializeMemoryNonZero (size-1) dataOffset
 
-initializeCacheZero :: Int -> Caches
+initializeCacheZero :: Int -> [(Int, Int, Int, [Int], Int, Int, Int, [Int])]
 initializeCacheZero 0 = []
 initializeCacheZero n = (0, 0, 0, initializeToZero, 0, 0, 0, initializeToZero):initializeCacheZero (n-1)
 
 -- the following 3 are the actual constructions of our registers, cache and main memory. These are the
 -- structures that are passed into the driver functions, which is the followInstructions function below
-registers :: Registers
+registers :: [[Int]]
 registers = initializeRegisterZero 8
 
-cache :: Caches
+cache :: [(Int, Int, Int, [Int], Int, Int, Int, [Int])]
 cache = initializeCacheZero 8
 
-mainmemory :: MainMemory
+mainmemory :: [[Int]]
 mainmemory = reverse (initializeMemoryNonZero 127 5)
 
-
-
-{-
-		instruction <- readFile "p3input.txt"
-		getInstructions instructions
-
--}
 -- checkOpCode
 -- takes in an instruction and looks at the op code for that construction
 -- if the op code calls store word, the boolean return is True
@@ -213,7 +194,7 @@ getInstructions file = instructionSet where
 -- This function uses recursion to run each instruction from the input file. Once there are no more instructions, the contents
 -- of the register, cache, and main memory are displayed.
 -- In each call to this function, the updated registers, cache and main memory are passed through, so each instruction accesses the correct data.
-followInstructions :: [[Int]] -> (Registers, Caches, MainMemory) -> (Registers, Caches, MainMemory)
+followInstructions :: [[Int]] -> ([[Int]], [(Int, Int, Int, [Int], Int, Int, Int, [Int])], [[Int]]) -> ([[Int]], [(Int, Int, Int, [Int], Int, Int, Int, [Int])], [[Int]])
 followInstructions [] (registerSet, cacheSet, mainMemorySet) = (registerSet, cacheSet, mainMemorySet)
 followInstructions (x:xs) (registerSet, cacheSet, mainMemorySet) | checkOpCode x = followInstructions xs (registerSet, updatedCache, updatedMemory) where
 	retrievedRegister = getRegister x
@@ -240,20 +221,6 @@ followInstructions (x:xs) (registerSet, cacheSet, mainMemorySet) | otherwise = f
 	updatedRegisters = if (newlru1 == 1) then replaceNthElemRegister retrievedRegister newword1 registerSet
 					   else replaceNthElemRegister retrievedRegister newword2 registerSet
 
-{-
-80 -- 20 -> 5
-68 -- 17 -> 9
-76 -- 19 -> 13
-224 -- 56 -> 10
-20 -- 5 -> 14
-24 -- 6 -> 16
-36 -- 9 -> 9
-68 -- 17 -> 48
-96 -- 24 -> 9
-84 -- 21 -> 16
-92 -- 23 -> 9
-240 -- 60 -> 48
--}
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------- Results -----------------------------------
 {-
@@ -262,6 +229,7 @@ followInstructions (x:xs) (registerSet, cacheSet, mainMemorySet) | otherwise = f
 Ok, modules loaded: Main.
 *Main> instruction <- readFile fileName
 *Main> getInstructions instruction
+
 [[1,0,0,0,1,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
 [1,0,0,0,1,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
 [1,0,0,0,1,1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
@@ -288,6 +256,7 @@ Ok, modules loaded: Main.
 [1,0,1,0,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0]]
 
 *Main> followInstructions it (registers, cache, mainmemory)
+
 ([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
