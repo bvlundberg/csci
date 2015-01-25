@@ -11,13 +11,12 @@
 				Node pointer for left child
 				Node pointer for right child
 			Methods:
-				Constructor{
-					set value for the Node
-				}
+				Constructor- set value for the Node
 		BST.h - Implementation of the bst class
 			Members:
 				Node to hold the root of the BST
 			Methods:
+				Constructor - set root to null
 				insert - adds a Node to the tree
 				delete - removes a Node from the tree
 				find - searhces the tree for a specific Node
