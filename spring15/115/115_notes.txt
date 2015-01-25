@@ -1,0 +1,16 @@
+Chapter 1
+- aggregate type/composite type - data type containing several pieces of information
+- abstract data type - realization of a data type as a software
+	component. The interface of the ADT is defined in terms of a type and a set of
+	operations on that type. The behavior of each operation is determined by its inputs
+	and outputs. An ADT does not specify how the data type is implemented. These
+	implementation details are hidden from the user of the ADT and protected from
+	outside access, a concept referred to as encapsulation.
+
+- class - ADT + data structure
+
+- Design patterns
+	Flyweight - the various instances of references to a specific form of the one concrete copy
+	Visitor - writing a generic version of an algorithm for every necessary time it is needed for an activity
+	Composite - a group of objects is to be treated as a single instance of an object. Keeps uniformity in a part-whole hierarchy
+	Strategy - handing the correct strategy to an object so it knows what to do with the information, but not the exact information. Let the object decide how the action will be performed.

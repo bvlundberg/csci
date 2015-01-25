@@ -1,0 +1,7 @@
+dijkstra
+Steps
+- Initialization
+S = {}
+Q = All vertices
+
+1. 

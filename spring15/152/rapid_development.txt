@@ -1,0 +1,73 @@
+Chapter 4 - Software-Development Fundamentals
+3 sides of the trade0ff triange
+	- schedule
+	- cost
+	- product
+
+3 steps to create a software schedule
+	- size of the project
+	- effort needed to build a product of that size
+	- schedule based on the effort estimate
+
+Tracking a project
+	- task lists
+	- status meetings
+	- status reports
+	- milestone reviews
+	- budjet reports
+
+In order to plan projects and estimate times of delivery, you must be able to calculate development speed through metrics and calculate increases/decreases in that speed.
+
+Here are the fundamer'iital topics in architecture and design:
+• Major design styles (such as object design, structured design, and dat ' a
+structure design)
+• Foundational desigr~j concepts (such as information hiding, modularity,
+abstraction, encapsilation, cohesion, coupling, hierarchy, inheritance ,
+polymorphism, basi'Ic algorithms, and basic data structures)
+• Standard design approaches to typically challenging areas (including
+exception handling, internationalization and localization, portability ,
+string storage, input/output, memory management, data storage ,
+floating-point arithmetic, database design, performance, and reuse )
+• Design consideratidns unique to the application domain you're working
+in (financial applications, scientific applications, embedded systems,
+real-time systems, safety-critical software, or something else )
+• Architectural schen es (such as subsystem organization, layering ,
+subsystem communication styles, and typical system architectures )
+• Use of design tools
+
+Paying attention to construction fundamentals is as much as risk-management practice as a time-saving practice
+
+Software configuration management- practice of managing project artifacts so that the project stays in a consistent state over time. SCM includes practices for evaluating proposed changes, tracking changes, handling multiple versionls, and keeping copies of project artifacts as they existed at various times.
+
+Every hour you spend on defect prevention will reduce your repair time 3 to 10 hours
+
+60% of all defects usually exist at design time, you can save time by detecting defects earlier than in system testing
+
+Unit and system testing find less than 60% of defects. Remaining errors found in code review and end-users
+
+Best way to leverage testing from a rapid-development viewpoint is to plan ahead for bad news
+
+Technical Review
+	- Walkthrough
+		any meeting in which two or more developers review. Can detect defects well before testing. Walkthroughs can detect 30-70% of defects
+	- Inspection
+		Roles include:
+			Moderator- hands out product
+			Reviewers- examine product before the meeting and use checklists to stimulate their review.
+			Author- paraphrases product
+			Process- Author paraphrases, reviewers identify errors, scribe records errors. Moderator creates inspection report that describes each defect and what will be done about it.
+		Must analyze inspections and time spent on them to check effectiveness
+		Can find 60 to 90 percent of defects
+		Each hour of inspection avoided an average of 33 hours of maintainance & 20x more effective than testing
+
+Chapter 6 - Core Issues in Rapid Development
+
+Different projects have different rapid-development needs, even when they all need to be developed "as fast as possible"
+
+If meeting the project's Schedule is important enough to put pressure on you, it is important enough for the customer to increase the level of support for the project. If the company asks its developers to work harder, it must be willing to work harder,] too . If you find yourself in a situation in which your customer is simply trying to get your team to work for free, there is probably almost nothing that you can do to improve it. Customers who practice this style ofsoftware development do not have your best interests in mind .
+Your most sensible options are to refuse to work on such projects or to change jobs .
+
+Odds of completing a project on time
+Use the 50/50 "break even" schedule - projects should be scheduled so that the probability of coming in early would be the same as the probability of coming in late
+
+Even if development is slow, communicating with the customer frequently on progress can control their worries
