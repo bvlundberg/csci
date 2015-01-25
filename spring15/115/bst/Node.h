@@ -8,18 +8,18 @@ class Node
 {
 private:
 	int m_value;
-	Node *rChild;
-	Node *lChild;
+	Node *m_rChild;
+	Node *m_lChild;
 public:
 	// Node constructor and destructor
 	Node(int value){
 		m_value = value;
-		rChild = null;
-		lChild = null;
+		m_rChild = null;
+		m_lChild = null;
 	}
 	~Node(){
-		rChild = null;
-		lChild = null;
+		m_rChild = null;
+		m_lChild = null;
 	}
 	// Get and Set functions for class members
 	int getValue(){
@@ -29,16 +29,16 @@ public:
 		m_value = newValue;
 	}
 	Node* getrChild(){
-		return rChild;
+		return m_rChild;
 	}
 	void setrChild(Node *newRightChild){
-		rChild = newRightChild;
+		m_rChild = newRightChild;
 	}
 	Node* getlChild(){
-		return lChild;
+		return m_lChild;
 	}
 	void setlChild(Node *newLeftChild){
-		lChild = newLeftChild;
+		m_lChild = newLeftChild;
 	}	
 };
 
