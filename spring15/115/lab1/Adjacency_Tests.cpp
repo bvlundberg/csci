@@ -1,11 +1,12 @@
 #include "gtest/gtest.h"
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 #include "graph.h"
 
 using namespace std;
 
-TEST(AdjList, Instantiation){
+TEST(AdjListInstantion, AllocatingSize){
 	vector<graph*> adj_list;
 	// Create pointers for each adjacency list for all verticies
 	adj_list.push_back(NULL);
@@ -14,11 +15,20 @@ TEST(AdjList, Instantiation){
 	adj_list.push_back(NULL);
 	adj_list.push_back(NULL);
 	EXPECT_EQ(adj_list.size(), 5);
+}
+
+TEST(AdjListInstantion, InsertEdges){
+	vector<graph*> adj_list;
+	// Create pointers for each adjacency list for all verticies
+	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
 
 	// Create edges
-
-
-
+	graph graph_obj;
+    graph_obj.insert_edge(0,1);
 
 }
 
