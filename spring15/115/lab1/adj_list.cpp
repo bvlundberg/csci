@@ -10,6 +10,7 @@ vector<graph*> adj_list; // one dimensional vector; each position in the vector 
 void graph::initialize_graph(int num_of_vertices, int num_of_edges)
 {
     int vertex1, vertex2;
+    graph newGraph;
     for(int i = 0; i < num_of_vertices; i++){
         adj_list.push_back(NULL);
     }
@@ -18,7 +19,7 @@ void graph::initialize_graph(int num_of_vertices, int num_of_edges)
         cout<<"Enter the edge to insert into the graph: ";
         cin>>vertex1>>vertex2;
         cout<<endl<<endl;
-        this->insert_edge(vertex1, vertex2); 
+        newGraph.insert_edge(vertex1, vertex2); 
     }
     cout<<endl<<endl<<endl;
     
@@ -26,24 +27,23 @@ void graph::initialize_graph(int num_of_vertices, int num_of_edges)
 
 void graph::insert_edge(int vertex1, int vertex2)
 {
-    /*
     if(adj_list[vertex1] == NULL){
         graph *newVertex = new graph(NULL, NULL, newVertex, vertex2);
+        adj_list[vertex1] = newVertex;
     }
     else{
         graph *currVertex = adj_list[vertex1];
         // Traverse to the end of the linked list
-        while(currVertex->next != NULL){
+        while(currVertex->m_next != NULL){
             // Vertex is already in the list
-            if(currVertex->edge == vertex2)
+            if(currVertex->m_edge == vertex2)
                 return;
-            currVertex = currVertex->next;
+            currVertex = currVertex->m_next;
         }
         graph *newVertex = new graph(currVertex, NULL, vertex2);
-        currVertex->next = newVertex;
+        currVertex->m_next = newVertex;
     }
     cout<<endl<<endl<<endl;
-    */
 }
 
 void graph::delete_edge(int vertex1, int vertex2)
@@ -57,10 +57,14 @@ void graph::delete_edge(int vertex1, int vertex2)
 
 void graph::list_all_edges(int num_of_vertices)
 {
-     
-    //implement this function  
-
-   cout<<endl<<endl<<endl;
+    for(int i = 0; i < num_of_vertices; i++){
+        graph *currNode = adj_list[i];
+        while(currNode != NULL){
+            cout << i << "->" << currNode->m_edge << endl;
+            currNode = currNode->m_next;
+        }
+    }
+    cout<<endl<<endl<<endl;
 }
 
 void graph::list_all_neighbors(int vertex1, int num_of_vertices)
