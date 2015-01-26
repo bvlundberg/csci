@@ -1,9 +1,9 @@
 #include <stdio.h>
+#include "gtest/gtest.h"
 #include "Node.h"
 #include "BST.h"
-//#include "gtest/gtest.h"
 
-int main(){
-
+int main(int argc, char* argv[]){
+	
 	return 0;
 }
