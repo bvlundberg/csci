@@ -4,16 +4,15 @@
 	Date: 24 Jan 2015
 */
 
-class BST
-{
+class BST{
 private:
 	Node *m_root;
 public:
 	// BST constructor and destructor
 	BST(){
-		m_root = null;
+		m_root = NULL;
 	}
-	~BST(// Delete all elements in the tree);
+	~BST(){}
 	// Get and set functions for BST
 	Node* getRoot(){
 		return m_root;
@@ -26,7 +25,7 @@ public:
 	void insert_node(int value){
 		Node newNode = new Node(value);
 
-		if(getRoot() == null){
+		if(getRoot() == NULL){
 			setRoot(newNode);
 		}
 

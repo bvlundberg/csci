@@ -12,14 +12,15 @@ private:
 	Node *m_lChild;
 public:
 	// Node constructor and destructor
+	Node(){}
 	Node(int value){
 		m_value = value;
-		m_rChild = null;
-		m_lChild = null;
+		m_rChild = NULL;
+		m_lChild = NULL;
 	}
 	~Node(){
-		m_rChild = null;
-		m_lChild = null;
+		m_rChild = NULL;
+		m_lChild = NULL;
 	}
 	// Get and Set functions for class members
 	int getValue(){
