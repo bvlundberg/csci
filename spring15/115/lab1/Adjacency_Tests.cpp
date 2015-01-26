@@ -7,11 +7,19 @@ using namespace std;
 
 TEST(AdjList, Instantiation){
 	vector<graph*> adj_list;
+	// Create pointers for each adjacency list for all verticies
 	adj_list.push_back(NULL);
 	adj_list.push_back(NULL);
 	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
+	adj_list.push_back(NULL);
+	EXPECT_EQ(adj_list.size(), 5);
 
-	EXPECT_EQ(adj_list.size(), 3);
+	// Create edges
+
+
+
+
 }
 
 int main(int argc, char* argv[]){
