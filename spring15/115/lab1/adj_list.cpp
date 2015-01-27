@@ -48,11 +48,41 @@ void graph::insert_edge(int vertex1, int vertex2)
 
 void graph::delete_edge(int vertex1, int vertex2)
 {
-  
-  //implement this function
-  
- cout<<endl<<endl<<endl;
-
+    if(adj_list[vertex1] == NULL){
+        cout << "No edges from this vertex.";
+        return;
+    }
+    else{
+        graph *currVertex = adj_list[vertex1];
+        while(currVertex != NULL){
+            // Edge found
+            if(currVertex -> m_edge == vertex2){
+                // If the currVertex is the head
+                if(currVertex == adj_list[vertex1]){
+                    currVertex->m_next->m_prev = NULL;
+                    adj_list[vertex1] = currVertex->m_next;
+                    currVertex = NULL;
+                    delete currVertex; 
+                }
+                // Any other case
+                else{
+                    currVertex->m_prev->m_next = currVertex->m_next;
+                    // If the current vertex next is null
+                    if(currVertex->m_next != NULL){
+                        currVertex->m_next->m_prev = currVertex->m_prev;
+                    }
+                    currVertex = NULL;
+                    delete currVertex;
+                }
+            }
+            else
+                currVertex = currVertex -> m_next;
+        }
+        // Edge was not in the list
+        cout << "This edge was not found.";
+        return;
+    }
+    cout<<endl<<endl<<endl;
 }
 
 void graph::list_all_edges(int num_of_vertices)
@@ -145,6 +175,7 @@ int main()
            break;
    
      case 4:
+            cout << "Every edge in the graph: " << endl;
              graph_obj.list_all_edges(num_of_vertices);
              break;
      
