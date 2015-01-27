@@ -11,9 +11,22 @@ void graph::initialize_graph(int num_of_vertices, int num_of_edges)
 {
     int vertex1, vertex2;
     graph newGraph;
+
+    vector <graph> matrix_row;
+    graph graph_obj;
     for(int i = 0; i < num_of_vertices; i++){
-        adj_list.push_back(NULL);
+        matrix_row.push_back(graph_obj);
+    }    
+    for(int i = 0; i < num_of_vertices; i++){
+        adj_matrix.push_back(matrix_row);
     }
+
+    for(int i = 0; i < num_of_vertices; i++){
+        for(int j = 0; j < num_of_vertices; j++){
+            adj_matrix[i][j].m_edge = 0;
+        }
+    }
+
     for(int i = 0; i < num_of_edges; i++){
         cout<<"To enter an edge X -> Y (an edge from node X to node Y), use the following format: X Y (the names of the two vertices separated by a single space)" << endl;
         cout<<"Enter the edge to insert into the graph: ";
@@ -27,8 +40,7 @@ void graph::initialize_graph(int num_of_vertices, int num_of_edges)
 
 void graph::insert_edge(int vertex1, int vertex2)
 {
- 
- //implement this function
+    adj_matrix[vertex1][vertex2].m_edge = 1;
  
  cout<<endl<<endl<<endl;
   
@@ -37,7 +49,7 @@ void graph::insert_edge(int vertex1, int vertex2)
 void graph::delete_edge(int vertex1, int vertex2)
 {
   
-  //implement this function
+    adj_matrix[vertex1][vertex2].m_edge = 0;
   
  cout<<endl<<endl<<endl;
 
@@ -45,9 +57,12 @@ void graph::delete_edge(int vertex1, int vertex2)
 
 void graph::list_all_edges(int num_of_vertices)
 {
-     
-    //implement this function  
-
+   for(int i = 0; i < num_of_vertices; i++){
+        for(int j = 0; j < num_of_vertices; j++){
+            if(adj_matrix[i][j].m_edge == 1)
+                cout << i << "->" << j << endl;
+        }
+    }
    cout<<endl<<endl<<endl;
 }
 
@@ -61,9 +76,15 @@ void graph::list_all_neighbors(int vertex1, int num_of_vertices)
 
 void graph::no_incoming_edges(int num_of_vertices)
 {
-    
-     //implement this function  
-
+    for(int i = 0; i < num_of_vertices; i++){
+        bool noEdges = true;
+        for(int j = 0; j < num_of_vertices; j++){
+            if(adj_matrix[j][i].m_edge == 1)
+                noEdges = false;
+        }
+        if(noEdges)
+            cout << i << " ";
+    }
     cout<<endl<<endl<<endl;
 }
 
