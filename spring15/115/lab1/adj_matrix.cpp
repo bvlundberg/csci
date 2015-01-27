@@ -7,8 +7,22 @@ using namespace std;
 
 vector< vector<graph> > adj_matrix; //two dimensional vector to represent the adjacency matrix
 
-void graph::initialize_graph(int num_of_vertices, int num_of_edges){
-
+void graph::initialize_graph(int num_of_vertices, int num_of_edges)
+{
+    int vertex1, vertex2;
+    graph newGraph;
+    for(int i = 0; i < num_of_vertices; i++){
+        adj_list.push_back(NULL);
+    }
+    for(int i = 0; i < num_of_edges; i++){
+        cout<<"To enter an edge X -> Y (an edge from node X to node Y), use the following format: X Y (the names of the two vertices separated by a single space)" << endl;
+        cout<<"Enter the edge to insert into the graph: ";
+        cin>>vertex1>>vertex2;
+        cout<<endl<<endl;
+        newGraph.insert_edge(vertex1, vertex2); 
+    }
+    cout<<endl<<endl<<endl;
+    
 }
 
 void graph::insert_edge(int vertex1, int vertex2)
