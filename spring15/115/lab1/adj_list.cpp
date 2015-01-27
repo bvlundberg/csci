@@ -77,12 +77,26 @@ void graph::list_all_neighbors(int vertex1, int num_of_vertices)
 
 void graph::no_incoming_edges(int num_of_vertices)
 {
-    
-     //implement this function  
-
+    for(int i = 0; i < num_of_vertices; i++){
+        bool noEdges = true;
+        for(int j = 0; j < num_of_vertices; j++){
+            noEdges &= no_incoming_edges_helper(i, j);
+        }
+        if(noEdges)
+            cout << i << " ";
+    }
     cout<<endl<<endl<<endl;
 }
 
+bool graph::no_incoming_edges_helper(int targetVertex, int currList){
+    graph *currNode = adj_list[currList];
+    while(currNode != NULL){
+        if(currNode->m_edge == targetVertex)
+            return false;
+        currNode = currNode->m_next;
+    }
+    return true;
+}
 int main()
 {
     int num_of_vertices, num_of_edges, vertex1, vertex2, function;
@@ -142,6 +156,7 @@ int main()
             break;
             
      case 6:
+            cout << "The following verticies have no incoming edges: ";
            graph_obj.no_incoming_edges(num_of_vertices);
             
               

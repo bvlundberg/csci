@@ -19,7 +19,8 @@ class graph //class for the graph data structure
      void list_all_edges(int num_of_vertices); // lists all of the edges in the graph
      void list_all_neighbors(int vertex1, int num_of_vertices); // lists all of the neighbors for a particular vertex
      void no_incoming_edges(int num_of_vertices);  // lists all of the vertices with no incoming edges
-      
+     bool no_incoming_edges_helper(int targetVertex, int currentList);
+
     private: 
     graph *m_prev; //pointer to the previous node in the linked list (used in the adjacency list implementation only)
     graph *m_next;  //pointer to the next node in the linked list    (used in the adjacency list implementation only)
