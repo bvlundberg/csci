@@ -63,6 +63,7 @@ void graph::delete_edge(int vertex1, int vertex2)
                     adj_list[vertex1] = currVertex->m_next;
                     currVertex = NULL;
                     delete currVertex; 
+                    return;
                 }
                 // Any other case
                 else{
@@ -73,6 +74,7 @@ void graph::delete_edge(int vertex1, int vertex2)
                     }
                     currVertex = NULL;
                     delete currVertex;
+                    return;
                 }
             }
             else
@@ -99,9 +101,11 @@ void graph::list_all_edges(int num_of_vertices)
 
 void graph::list_all_neighbors(int vertex1, int num_of_vertices)
 {  
- 
-     //implement this function  
-      
+    graph *currNode = adj_list[vertex1];
+    while(currNode != NULL){
+        cout << currNode->m_edge << " ";
+        currNode = currNode->m_next;
+    }
    cout<<endl<<endl<<endl;
 }
 

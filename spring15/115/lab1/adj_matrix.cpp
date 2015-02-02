@@ -68,9 +68,10 @@ void graph::list_all_edges(int num_of_vertices)
 
 void graph::list_all_neighbors(int vertex1, int num_of_vertices)
 {  
- 
-     //implement this function  
-      
+    for(int i = 0; i < num_of_vertices; i++){
+        if(adj_matrix[vertex1][i].m_edge == 1)
+            cout << i << " ";
+    }
    cout<<endl<<endl<<endl;
 }
 
