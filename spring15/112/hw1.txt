@@ -1,0 +1,76 @@
+CSCI 112 HW 1
+
+1.
+a. 	Binary = 11111011110
+	Hex = 7DE
+	Decimal = 2014
+b.	Binary = 110101111010101
+	Hex = 6BD5
+	Decimal = 27605
+c.	Binary = 1000001111011
+	Hex = 107B
+	Decimal = 4219
+
+2.
+a.	String = January 1 is New Year’s Day.
+	Code = 4A616E756172792031206973204E657720596561722773204461792E
+
+b.	Code = 243338392E3435
+	String = $389.45
+
+3.	
+a.	Decimal = 844
+	Binary = 00000000000000000000001101001100
+	2 comp = 11111111111111111111110010110100
+b.	Decimal = -100
+	Binary positive = 0000000000000000000000000000000000000000000000000000000001100100
+	Binary negative = 1111111111111111111111111111111111111111111111111111111110011100
+c. 	Hex: 98C2417D
+	Binary: 10011000110000100100000101111101
+	2 Comp: 01100111001111011011111010000011
+	Unsigned decimal: 1+0+4+8+16+32+64+0+256+0+0+0+0+0+16384+131072+4194304+8388608+134217728+268435456+2147483648 = 2562867581
+	Signed decimal: 3+2^7+2^9+2^10+2^11+2^12+2^13+2^15+2^16+2^18+2^19+2^20+2^21+2^24+2^25+2^26+2^29+2^30 = -1732099715
+
+4.			 111
+a. Binary 	 2A44 			10820	10820
+		   + D9CC 		   -9780   +55756
+		   	 0410 1 CO		1040	66576 but there carry out exceeds the 
+		   	 							  word limit of 65536
+
+		   	 0000010000010000
+
+		   	 In the unsigned number convention, the value has carry out from the sign bit, meaning that it exceeded the word limit of 65536, so the answer is incorrect.
+
+		   	 In the signed number convention, the first number is positive and the second number is negative, so there will be no overflow, meaning that the answer will be correct
+
+b.	Binary 	8AD0		-35000	35536
+		   +EC78		-5000  +60536
+		   	7748 1 CO	-35000	96072
+
+		   	0111011101001000
+		   	
+		   	In the unsigned number convention, the value has carry out from the sign bit, meaning that it exceeded the word limit of 65536, so the answer is incorrect.
+
+		   	In the signed number convention, both numbers are negative, but the answer is positive, meaning that overflow occurred.
+
+c.	Binary 	681C    	 681C	     26652		26652
+	   	   -EBBC   		+1444      -(-5188)	   -60348
+   	                     7C60    	 31840	   -33696
+   	    	0111110001100000
+   	    	
+   	    	In the unsigned number system, the value is less than 0, which is not possible in the unsigned system.
+
+   	    	In the signed number system, you are subtracting a number, so I switched the second number to its twos complement form and added the values. then, it was adding two positive numbers with no overflow, so i know that the answer was correct.
+5.
+a.	Decimal = -44
+	Binary positive:         00000000000000000000000000101100
+	Binary negative 1s comp: 11111111111111111111111111010011
+b.	Decimal: 43.5
+	Binary whole: 101011
+	Binary decimal:1
+	Binary: 101011.1 => 1.010111 * 2^5
+	Binary final: 0 10000101 01011100000000000000000
+
+6.
+a.
+b 7FFF = 32 kb
