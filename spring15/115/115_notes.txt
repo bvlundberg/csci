@@ -14,3 +14,41 @@ Chapter 1
 	Visitor - writing a generic version of an algorithm for every necessary time it is needed for an activity
 	Composite - a group of objects is to be treated as a single instance of an object. Keeps uniformity in a part-whole hierarchy
 	Strategy - handing the correct strategy to an object so it knows what to do with the information, but not the exact information. Let the object decide how the action will be performed.
+
+Chapter 2 - Mathematical Notation
+	in relations -- <x,y> = xRy
+	equivalence relation - reflexive, symmetric and transitive
+		a set can be partitioned into equivalence classes
+		a relation on set S partitions the set into disjoint subsets whose elements are equivalent
+	partial order - antisymmetric and transitive
+	total order - if every pair of distinct elements in a partial order are comparable
+	logarithms - 
+		Logarithms have the following properties, for any positive values of m, n, and r, and any positive integers a and b.
+
+		log(nm)=logn+logm.
+		log(n/m)=logn−logm.
+		log(n^r)=rlogn.
+		log a n=log b n/log b a.
+
+	closed form solution - given a summation, we often want to write it in terms of an algebraic equation
+	recurrence relation - a function by means of an expression that includes one or more instances of itself
+
+	direct proof(argument by deduction)
+		a logical explanation, written in english
+	proof by contradiction
+		first assume that the theorm is false, then find a logical contradiction stemming from the assumptions
+		If the contradiction is correct, then we must prove that the assumption is false is incorrect, meaning that the theorm must actually be correct
+	induction
+		Must have a theorm to prove
+		Must prove that the theorm holds true for any value n
+		To do this, must prove for:
+			Base case: theorm holds for n = c
+			Induction step: if theorm hold for n - 1, theorm holds for n
+		Strong induction - 
+			Base case is the same
+			Induction step: If theorm holds for all k, where c <= k < n, then the theorm holds for n
+		Induction hypothesis - What makes mathematical induction so powerful (and so mystifying to most people at first) is that we can take advantage of the assumption that Thrm holds for all values less than n as a tool to help us prove that Thrm holds for n
+
+Chapter 3 - Algorithm Analysis
+	asymptotic analysis - estimate the resource consumption of an algorithm, compare relative costs of two or more algorithms for solving the same problem, and estimate whether a solution before it is even implemented
+	
