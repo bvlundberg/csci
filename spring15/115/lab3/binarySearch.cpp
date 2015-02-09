@@ -26,7 +26,7 @@ int main(){
 	int numSearches = 10000;
 	srand(time(NULL));
 	for(int i = 0; i < numSearches; i++){
-		int targetFound = binary(array, n - 1, rand() % n);	// if value is found, targetFound will be the targetValue
+		int targetFound = binary(array, n, rand() % n);	// if value is found, targetFound will be the targetValue
 		cout << targetFound << " ";
 	}
 	
