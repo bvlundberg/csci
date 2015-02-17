@@ -16,6 +16,7 @@ int binary(int A[], int n, int K) {
 }
 
 int main(){
+	time_t t1, t2;
 	int n;
 	cin >> n;
 	int array[n];
@@ -23,13 +24,14 @@ int main(){
 		array[i] = i;
 	}
 
-	int numSearches = 10000;
+	int numSearches = 100000000;
+	time(&t1);
 	srand(time(NULL));
 	for(int i = 0; i < numSearches; i++){
 		int targetFound = binary(array, n, rand() % n);	// if value is found, targetFound will be the targetValue
-		cout << targetFound << " ";
 	}
-	
+	time(&t2);
 	cout << endl;
+	cout << "It took " << difftime(t2, t1) << " seconds." << endl;
 	return 0;
 }
