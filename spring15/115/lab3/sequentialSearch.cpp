@@ -1,3 +1,8 @@
+/*	Author: Brandon Lundberg
+	File Name: sequentialSearch.cpp
+	Purpose: Time the sequential search operation
+	Date: 9 Feb 2015
+*/
 #include <cstdlib>      /* printf, NULL */
 #include <iostream>
 #include <time.h>       /* time */
