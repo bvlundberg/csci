@@ -1,3 +1,8 @@
+/*	Author: Brandon Lundberg
+	File Name: binarySearch.cpp
+	Purpose: Time the binary search operation
+	Date: 9 Feb 2015
+*/
 #include <cstdlib>      /* printf, NULL */
 #include <iostream>
 #include <time.h>       /* time */
