@@ -1,0 +1,12 @@
+The EAX, EBX, ECX, and EDX registers are called data registers or general registers.
+The EAX register is sometimes known as the accumulator since it is the destination
+for many arithmetic results. An example of an instruction using the EAX register is
+add eax, 158
+which adds the decimal number 158 (converted to doubleword length 2’s complement
+form) to the number already in EAX, replacing the number originally in EAX by the sum.
+
+EAX reg is 32 bits long
+0-15 = AX
+0-7 = AL
+8-15 = AH
+
