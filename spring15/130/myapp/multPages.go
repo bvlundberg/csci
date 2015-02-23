@@ -6,13 +6,18 @@ import (
 )
 
 func init() {
+	http.HandleFunc("/", rootHandler)		
 	http.HandleFunc("/brandon", myPage)
 	http.HandleFunc("/dodgers", lad)
 	http.HandleFunc("/giants", sf)
 	http.ListenAndServe(":8080", nil)
 }
 
-func myPage (w http.ResponseWriter, r *http.Request) {
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello!")
+}
+
+func myPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "This is my page!")
 }
 
