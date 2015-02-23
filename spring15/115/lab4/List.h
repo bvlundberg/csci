@@ -30,4 +30,4 @@ public:
 
    // Return total number of free nodes
    virtual int numFree() = 0;
-}
+};
