@@ -1,0 +1,110 @@
+FROM CHAPTER 02
+What are the two ways of writing a comment?
+	//
+	/*	*/
+Our program began with package main. What would the files in the fmt package begin with?
+	package fmt
+We used the Println function defined in the fmt package. If we wanted to use the Exit function from the os package what would we need to do?
+	the Exit function is included in the os package
+	the Exit function can be called by calling os.Exit()
+
+FROM CHAPTER 03 
+What is a string? How do you find its length?
+	a string is a sequence of characters
+	the length can be found by calling len(name of the string)
+What's the value of the expression:
+(true && false) || (false && true) || !(false && false)
+	true
+
+FROM CHAPTER 04
+What are two ways to create a new variable?
+	var variableName type = value
+	variableName := value
+What is the difference between var and const?
+	variable can be changed throughout a program
+	const are assigned once, then not changed
+Write a program that converts from Fahrenheit into Celsius. (C = (F - 32) * 5/9)
+Write a program that converts from feet into meters. (1 ft = 0.3048 m)
+
+FROM CHAPTER 05
+Write a program that prints out all the numbers evenly divisible by 3 between 1 and 100. (3, 6, 9, etc.)
+Write a program that prints the numbers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz". For numbers which are multiples of both three and five print "FizzBuzz".
+
+FROM CHAPTER 06
+Given the array: 
+x := [6]string{"a","b","c","d","e","f"} 
+what would x[2:5] give you? 
+	[c d e]
+Write a program that finds the smallest number in this list: 
+x := []int{ 48,96,86,68, 57,82,63,70, 37,34,83,27, 19,97, 9,17, }
+
+FROM CHAPTER 07 
+sum is a function which takes a slice of numbers and adds them together. What would its function signature look like in Go? 
+	func sum(a []int) (ans int) {}
+Write a function which takes an integer and halves it and returns true if it was even or false if it was odd. For example half(1) should return (0, false) and half(2) should return (1, true). 
+Write a function with one variadic parameter that finds the greatest number in a list of numbers. 
+Using makeEvenGenerator as an example, write a makeOddGenerator function that generates odd numbers. 
+The Fibonacci sequence is defined as: fib(0) = 0, fib(1) = 1, fib(n) = fib(n-1) + fib(n-2). Write a recursive function which can find fib(n). 
+What are defer, panic and recover? How do you recover from a run-time panic?
+
+FROM CHAPTER 08
+How do you get the memory address of a variable?
+	&variableName
+How do you assign a value to a pointer? 
+	*variableName = value
+How do you create a new pointer? 
+	variableName := new(type)
+What is the value of x after running this program: 
+func square(x *float64) { *x = *x * *x } 
+func main() { 
+x := 1.5 
+square(&x) } 
+	2.25
+Write a program that can swap two integers (x := 1; y := 2; swap(&x, &y) should give you x=2 and y=1).
+
+FROM CHAPTER 09 
+What's the difference between a method and a function?
+	a method is a function that is tied to a struct or type 
+Why would you use an embedded anonymous field instead of a normal named field? 
+	you would use the embedded anonymous field in the case where you are inheriting from another type, instead of adding all the field of that
+	other type
+Add a new method to the Shape interface called perimeter which calculates the perimeter of a shape. Implement the method for Circle and Rectangle.s
+
+FROM CHAPTER 10 
+How do you specify the direction of a channel type? 
+	chan <- chan type
+Write your own Sleep function using time.After. 
+What is a buffered channel? How would you create one with a capacity of 20?
+	buffered channels allow to send values without a receiver for the values
+
+	variableName := make(chan type, 2)
+
+FROM CHAPTER 11 
+Why do we use packages? 
+	packages allow including functions in a short, organized way to speed up the compiler by incluing them in chunks
+What is the difference between an identifier that starts with a capital letter and one which doesn’t? (Average vs average) 
+	capitalized variables are available to other programs/packages
+What is a package alias? How do you make one? 
+	giving a different name to a package
+	import alias "packagename"
+We copied the average function from chapter 7 to our new package. Create Min and Max functions which find the minimum and maximum values in a slice of float64s. 
+How would you document functions you created?
+	godoc path/package func
+
+FROM CHAPTER 12
+Write a program that uses a package you also created. Write a test for that package.
+
+FROM CHAPTER 13
+Create a program(s) that uses each of the following packages - it is complete ACCEPTABLE if your program is exactly the same as the program and code detailed in chapter 13:
+strings
+os
+io/ioutil
+path/filepath
+errors
+sort
+hash/crc32
+crypto/sha1
+encoding/gob
+net/http
+math/rand
+
