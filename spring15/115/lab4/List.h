@@ -1,3 +1,5 @@
+//#ifndef LIST_CLASS
+#define LIST_CLASS
 template<typename E> class List {
 private:
    void operator =(const List&) {}  // Protect assignment
@@ -31,3 +33,4 @@ public:
    // Return total number of free nodes
    virtual int numFree() = 0;
 };
+//#endif
