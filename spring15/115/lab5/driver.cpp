@@ -147,7 +147,6 @@ bool parseString(string input){
 }
 
 int main(){
-	//Link<E>* Link<E>::freelist = NULL;
 	LinkedList<int> a;
 	a.append(0);
 	LinkedList<int> b;
@@ -200,13 +199,19 @@ int main(){
 	y.append(0);
 	LinkedList<int> z;
 	z.append(0);
+	LinkedList<int> temp1;
+	LinkedList<int> temp2;
 
-	LinkedList<int>* first = &a;
-	LinkedList<int>* last = &z;
-	LinkedList<int>* current = &a;
+	//LinkedList<int>* first = &a;
+	//LinkedList<int>* last = &z;
+	//LinkedList<int>* current = &a;
 
 	bool validate;
 	string inputString = "";
+	string destination = "";
+	string source1 = "";
+	string source2 = "";
+	string op = "";
 	while(1){
 		cout << "Input string: ";
 		getline(cin, inputString);
@@ -215,9 +220,76 @@ int main(){
 
 		}
 		else{
-
+			int i = 0;
+			// Read first character for destination
+			destination = inputString[0];
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Pass over = sign
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read register or integer
+			if(islower(inputString[i])){
+				source1 = inputString[i];
+				i++;
+			}
+			else if(isdigit(inputString[i])){
+				source1 = inputString[i];
+				i++;
+				while(isdigit(inputString[i])){
+					source1 += inputString[i];
+					i++;
+				}
+			}
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read operator
+			op = inputString[i];
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read register or integer
+			if(op == "^"){
+				source2 = inputString[i];
+				i++;
+				while(isdigit(inputString[i])){
+					source2 += inputString[i];
+					i++;
+				}
+			}
+			else{
+				if(islower(inputString[i])){
+					source2 = inputString[i];
+					i++;
+				}
+				else if(isdigit(inputString[i])){
+					source2 = inputString[i];
+					i++;
+					while(isdigit(inputString[i])){
+						source2 += inputString[i];
+						i++;
+					}
+				}
+			}
 		}
+		cout << "destination: " << destination << endl;
+		cout << "source 1: " << source1 << endl;
+		cout << "operator: " << op << endl;
+		cout << "source 2: " << source2 << endl;
 	}
+
+	return 0;
+}
 
 	/*
 	// Error message 1 -- Variable expected
@@ -245,5 +317,3 @@ int main(){
 	inputString = "a=123+456 b";
 	parseString(inputString);
 	*/
-	return 0;
-}
