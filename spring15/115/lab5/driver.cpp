@@ -37,13 +37,13 @@ using namespace std;
 	template <typename E> int 		Link<E>::freeNodes = 0;
 	template <typename E> Link<E>* 	Link<E>::freeList = NULL;
 
-void parseString(string input){
+bool parseString(string input){
 	int size = input.length();
 	int i = 0;
 	// Read first character
 	if(!islower(input[0])){
 		cout << "variable expected" << endl;
-		return;
+		return false;
 	}
 	i++;
 	// Check for whitespace
@@ -53,7 +53,7 @@ void parseString(string input){
 	// Read "="
 	if(input[i] != '='){
 		cout << "= expected" << endl;
-		return;
+		return false;
 	}
 	i++;
 	// Check for whitespace
@@ -75,7 +75,7 @@ void parseString(string input){
 		}
 		else{
 			cout << "variable or number expected" << endl;
-			return;
+			return false;
 		}
 	}
 	// Check for whitespace
@@ -88,7 +88,7 @@ void parseString(string input){
 			break;
 		default : 
 			cout << "operator expected" << endl;
-			return;
+			return false;
 	}
 	// Branch on this case
 	if(input[i] == '^'){
@@ -100,7 +100,7 @@ void parseString(string input){
 		// Check for integer
 		if(!isdigit(input[i])){
 			cout << "integer expected" << endl;
-			return;
+			return false;
 		}
 		// Read integer
 		while(isdigit(input[i])){
@@ -109,9 +109,9 @@ void parseString(string input){
 		// Check for end of line
 		if(i < size){
 			cout << "end of line expected" << endl;
-			return;
+			return false;
 		}
-		return;
+		return true;
 	}
 	else{
 		i++;
@@ -134,25 +134,89 @@ void parseString(string input){
 			}
 			else{
 				cout << "variable or number expected" << endl;
-				return;
+				return false;
 			}
 		}
 		// Check for end of line
 		if(i < size){
 			cout << "end of line expected" << endl;
-			return;
+			return false;
 		}
 	}
+	return true;
 }
 
 int main(){
 	//Link<E>* Link<E>::freelist = NULL;
+	LinkedList<int> a;
+	a.append(0);
+	LinkedList<int> b;
+	b.append(0);
+	LinkedList<int> c;
+	c.append(0);
+	LinkedList<int> d;
+	d.append(0);
+	LinkedList<int> e;
+	e.append(0);
+	LinkedList<int> f;
+	f.append(0);
+	LinkedList<int> g;
+	g.append(0);
+	LinkedList<int> h;
+	h.append(0);
+	LinkedList<int> i;
+	i.append(0);
+	LinkedList<int> j;
+	j.append(0);
+	LinkedList<int> k;
+	k.append(0);
 	LinkedList<int> l;
+	l.append(0);
+	LinkedList<int> m;
+	m.append(0);
+	LinkedList<int> n;
+	n.append(0);
+	LinkedList<int> o;
+	o.append(0);
+	LinkedList<int> p;
+	p.append(0);
+	LinkedList<int> q;
+	q.append(0);
+	LinkedList<int> r;
+	r.append(0);
+	LinkedList<int> s;
+	s.append(0);
+	LinkedList<int> t;
+	t.append(0);
+	LinkedList<int> u;
+	u.append(0);
+	LinkedList<int> v;
+	v.append(0);
+	LinkedList<int> w;
+	w.append(0);
+	LinkedList<int> x;
+	x.append(0);
+	LinkedList<int> y;
+	y.append(0);
+	LinkedList<int> z;
+	z.append(0);
+
+	LinkedList<int>* first = &a;
+	LinkedList<int>* last = &z;
+	LinkedList<int>* current = &a;
+
+	bool validate;
 	string inputString = "";
 	while(1){
 		cout << "Input string: ";
 		getline(cin, inputString);
-		parseString(inputString);
+		validate = parseString(inputString);
+		if(!validate){
+
+		}
+		else{
+
+		}
 	}
 
 	/*
