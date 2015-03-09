@@ -132,6 +132,9 @@ class LinkedList : public List <E> {
 	    	return curr -> element;
 	    }
 
+		Link<E>* getHead() const{
+	    	return head;
+	    }
 	    // Return total number of active nodes
 	    int numActive(){
 	    	head -> getActiveNodes();

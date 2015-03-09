@@ -38,6 +38,513 @@ using namespace std;
 	template <typename E> int 		Link<E>::freeNodes = 0;
 	template <typename E> Link<E>* 	Link<E>::freeList = NULL;
 
+bool parseString(string input, string *destination, string *source1, string *source2, string *op);
+void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op);
+
+
+
+int main(){
+	LinkedList<int> a;
+	a.append(0);
+	LinkedList<int> b;
+	b.append(0);
+	LinkedList<int> c;
+	c.append(0);
+	LinkedList<int> d;
+	d.append(0);
+	LinkedList<int> e;
+	e.append(0);
+	LinkedList<int> f;
+	f.append(0);
+	LinkedList<int> g;
+	g.append(0);
+	LinkedList<int> h;
+	h.append(0);
+	LinkedList<int> i;
+	i.append(0);
+	LinkedList<int> j;
+	j.append(0);
+	LinkedList<int> k;
+	k.append(0);
+	LinkedList<int> l;
+	l.append(0);
+	LinkedList<int> m;
+	m.append(0);
+	LinkedList<int> n;
+	n.append(0);
+	LinkedList<int> o;
+	o.append(0);
+	LinkedList<int> p;
+	p.append(0);
+	LinkedList<int> q;
+	q.append(0);
+	LinkedList<int> r;
+	r.append(0);
+	LinkedList<int> s;
+	s.append(0);
+	LinkedList<int> t;
+	t.append(0);
+	LinkedList<int> u;
+	u.append(0);
+	LinkedList<int> v;
+	v.append(0);
+	LinkedList<int> w;
+	w.append(0);
+	LinkedList<int> x;
+	x.append(0);
+	LinkedList<int> y;
+	y.append(0);
+	LinkedList<int> z;
+	z.append(0);
+	LinkedList<int> temp1;
+	LinkedList<int> temp2;
+
+	LinkedList<int>* d1 = &(a);
+	LinkedList<int>* s1 = &(temp1);
+	LinkedList<int>* s2 = &(temp2);
+
+	bool validate;
+	string inputString;
+	string destination;
+	string source1;
+	string source2;
+	string op;
+
+	while(1){
+		// Reset input values
+		inputString = "";
+		destination = "";
+		source1 = "";
+		source2 = "";
+		op = "";
+		// Get user input
+		cout << "Input string: ";
+		getline(cin, inputString);
+		// Validate string
+		validate = parseString(inputString, &destination, &source1, &source2, &op);
+		// Find integer values or register for first source value
+		switch(source1[0]){
+			case 'a': 
+				s1 = &a;
+				break;
+			case 'b': 
+				s1 = &b;
+				break;
+			case 'c': 
+				s1 = &c;
+				break;
+			case 'd': 
+				s1 = &d;
+				break;
+			case 'e': 
+				s1 = &e;
+				break;
+			case 'f': 
+				s1 = &f;
+				break;
+			case 'g': 
+				s1 = &g;
+				break;
+			case 'h': 
+				s1 = &h;
+				break;
+			case 'i': 
+				s1 = &i;
+				break;
+			case 'j': 
+				s1 = &j;
+				break;
+			case 'k': 
+				s1 = &k;
+				break;
+			case 'l': 
+				s1 = &l;
+				break;
+			case 'm': 	
+				s1 = &m;
+				break;
+			case 'n': 
+				s1 = &n;
+				break;
+			case 'o': 
+				s1 = &o;
+				break;
+			case 'p': 
+				s1 = &p;
+				break;
+			case 'q': 	
+				s1 = &q;
+				break;
+			case 'r': 
+				s1 = &r;
+				break;
+			case 's': 
+				s1 = &s;
+				break;
+			case 't': 
+				s1 = &t;
+				break;
+			case 'u': 
+				s1 = &u;
+				break;
+			case 'v': 
+				s1 = &v;
+				break;
+			case 'w': 
+				s1 = &w;
+				break;
+			case 'x': 
+				s1 = &x;
+				break;
+			case 'y': 
+				s1 = &y;
+				break;
+			case 'z': 
+				s1 = &z;
+				break;
+			default:
+				int size = source1.length();
+				int iterator = size - 1;
+				int ones, tens, hunds, thous, result;
+				while(size > 0){
+					if(size < 4){
+						switch(size){
+							case 3:
+								ones = source1[iterator] - '0';
+								iterator--; 
+								tens = (source1[iterator] - '0') * 10;
+								iterator--;
+								hunds = (source1[iterator] - '0') * 100;
+								iterator--;
+								result = hunds + tens + ones;
+								temp1.append(result);	
+								break;	
+							case 2:
+								ones = source1[iterator] - '0';
+								iterator--; 
+								tens = (source1[iterator] - '0') * 10;
+								iterator--; 
+								result = tens + ones;
+								temp1.append(result);
+								break;
+							case 1:
+								ones = source1[iterator] - '0';
+								iterator--; 
+								result = ones;
+								temp1.append(result);
+								break;
+						}
+						size = 0;
+					}
+					else{
+						//temp1.append(std::stoi(source1.substr(iterator, 4)));
+						ones = source1[iterator] - '0';
+						iterator--; 
+						tens = (source1[iterator] - '0') * 10;
+						iterator--;
+						hunds = (source1[iterator] - '0') * 100;
+						iterator--;
+						thous = (source1[iterator] - '0') * 1000;
+						iterator--;
+						result = thous + hunds + tens + ones;
+						temp1.append(result);
+						size -= 4;
+					}
+				}
+				temp1.printList();
+			}
+			
+		// Find integer values or register for second source value
+		switch(source2[0]){
+			case 'a': 
+				s2 = &a;
+				break;
+			case 'b': 
+				s2 = &b;
+				break;
+			case 'c': 
+				s2 = &c;
+				break;
+			case 'd': 
+				s2 = &d;
+				break;
+			case 'e': 
+				s2 = &e;
+				break;
+			case 'f': 
+				s2 = &f;
+				break;
+			case 'g': 
+				s2 = &g;
+				break;
+			case 'h': 
+				s2 = &h;
+				break;
+			case 'i': 
+				s2 = &i;
+				break;
+			case 'j': 
+				s2 = &j;
+				break;
+			case 'k': 
+				s2 = &k;
+				break;
+			case 'l': 
+				s2 = &l;
+				break;
+			case 'm': 	
+				s2 = &m;
+				break;
+			case 'n': 
+				s2 = &n;
+				break;
+			case 'o': 
+				s2 = &o;
+				break;
+			case 'p': 
+				s2 = &p;
+				break;
+			case 'q': 	
+				s2 = &q;
+				break;
+			case 'r': 
+				s2 = &r;
+				break;
+			case 's': 
+				s2 = &s;
+				break;
+			case 't': 
+				s2 = &t;
+				break;
+			case 'u': 
+				s2 = &u;
+				break;
+			case 'v': 
+				s2 = &v;
+				break;
+			case 'w': 
+				s2 = &w;
+				break;
+			case 'x': 
+				s2 = &x;
+				break;
+			case 'y': 
+				s2 = &y;
+				break;
+			case 'z': 
+				s2 = &z;
+				break;
+			default:
+				int size = source2.length();
+				int iterator = size - 1;
+				int ones, tens, hunds, thous, result;
+				while(size > 0){
+					if(size < 4){
+						switch(size){
+							case 3:
+								ones = source2[iterator] - '0';
+								iterator--; 
+								tens = (source2[iterator] - '0') * 10;
+								iterator--;
+								hunds = (source2[iterator] - '0') * 100;
+								iterator--;
+								result = hunds + tens + ones;
+								temp2.append(result);	
+								break;	
+							case 2:
+								ones = source2[iterator] - '0';
+								iterator--; 
+								tens = (source2[iterator] - '0') * 10;
+								iterator--; 
+								result = tens + ones;
+								temp2.append(result);
+								break;
+							case 1:
+								ones = source2[iterator] - '0';
+								iterator--; 
+								result = ones;
+								temp2.append(result);
+								break;
+						}
+						size = 0;
+					}
+					else{
+						//temp1.append(std::stoi(source1.substr(iterator, 4)));
+						ones = source2[iterator] - '0';
+						iterator--; 
+						tens = (source2[iterator] - '0') * 10;
+						iterator--;
+						hunds = (source2[iterator] - '0') * 100;
+						iterator--;
+						thous = (source2[iterator] - '0') * 1000;
+						iterator--;
+						result = thous + hunds + tens + ones;
+						temp2.append(result);
+						size -= 4;
+					}
+				}
+				temp2.printList();
+			}
+			
+		// Find destination register
+		switch(destination[0]){
+			case 'a': 
+				d1 = &a;
+				break;
+			case 'b': 
+				d1 = &b;
+				break;
+			case 'c': 
+				d1 = &c;
+				break;
+			case 'd': 
+				d1 = &d;
+				break;
+			case 'e': 
+				d1 = &e;
+				break;
+			case 'f': 
+				d1 = &f;
+				break;
+			case 'g': 
+				d1 = &g;
+				break;
+			case 'h': 
+				d1 = &h;
+				break;
+			case 'i': 
+				d1 = &i;
+				break;
+			case 'j': 
+				d1 = &j;
+				break;
+			case 'k': 
+				d1 = &k;
+				break;
+			case 'l': 
+				d1 = &l;
+				break;
+			case 'm': 
+				d1 = &m;
+				break;
+			case 'n': 
+				d1 = &n;
+				break;
+			case 'o':
+				d1 = &o;
+				break;
+			case 'p': 
+				d1 = &p;
+				break;
+			case 'q': 
+				d1 = &q;
+				break;
+			case 'r': 
+				d1 = &r;
+				break;
+			case 's': 
+				d1 = &s;
+				break;
+			case 't': 
+				d1 = &t;
+				break;
+			case 'u': 
+				d1 = &u;
+				break;
+			case 'v': 
+				d1 = &v;
+				break;
+			case 'w': 
+				d1 = &w;
+				break;
+			case 'x': 
+				d1 = &x;
+				break;
+			case 'y': 
+				d1 = &y;
+				break;
+			case 'z': 
+				d1 = &z;
+				break;
+		// Print values to be calculated
+		calculate(d1 -> getHead(), s1 -> getHead(), s2 -> getHead(), op);
+		cout << "destination: " << destination << endl;
+		cout << "source 1: " << source1 << endl;
+		cout << "operator: " << op << endl;
+		cout << "source 2: " << source2 << endl;
+		}
+	}
+
+	return 0;
+}
+		/*
+		if(!validate){
+
+		}
+		else{
+			int i = 0;
+			// Read first character for destination
+			destination = inputString[0];
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Pass over = sign
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read register or integer
+			if(islower(inputString[i])){
+				source1 = inputString[i];
+				i++;
+			}
+			else if(isdigit(inputString[i])){
+				source1 = inputString[i];
+				i++;
+				while(isdigit(inputString[i])){
+					source1 += inputString[i];
+					i++;
+				}
+			}
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read operator
+			op = inputString[i];
+			i++;
+			// Check for whitespace
+			while(isspace(inputString[i])){
+				i++;
+			}
+			// Read register or integer
+			if(op == "^"){
+				source2 = inputString[i];
+				i++;
+				while(isdigit(inputString[i])){
+					source2 += inputString[i];
+					i++;
+				}
+			}
+			else{
+				if(islower(inputString[i])){
+					source2 = inputString[i];
+					i++;
+				}
+				else if(isdigit(inputString[i])){
+					source2 = inputString[i];
+					i++;
+					while(isdigit(inputString[i])){
+						source2 += inputString[i];
+						i++;
+					}
+				}
+			}
+		}
+		*/
 bool parseString(string input, string *destination, string *source1, string *source2, string *op){
 	int size = input.length();
 	int i = 0;
@@ -156,401 +663,6 @@ bool parseString(string input, string *destination, string *source1, string *sou
 	return true;
 }
 
-
-
-int main(){
-	LinkedList<int> a;
-	a.append(0);
-	LinkedList<int> b;
-	b.append(0);
-	LinkedList<int> c;
-	c.append(0);
-	LinkedList<int> d;
-	d.append(0);
-	LinkedList<int> e;
-	e.append(0);
-	LinkedList<int> f;
-	f.append(0);
-	LinkedList<int> g;
-	g.append(0);
-	LinkedList<int> h;
-	h.append(0);
-	LinkedList<int> i;
-	i.append(0);
-	LinkedList<int> j;
-	j.append(0);
-	LinkedList<int> k;
-	k.append(0);
-	LinkedList<int> l;
-	l.append(0);
-	LinkedList<int> m;
-	m.append(0);
-	LinkedList<int> n;
-	n.append(0);
-	LinkedList<int> o;
-	o.append(0);
-	LinkedList<int> p;
-	p.append(0);
-	LinkedList<int> q;
-	q.append(0);
-	LinkedList<int> r;
-	r.append(0);
-	LinkedList<int> s;
-	s.append(0);
-	LinkedList<int> t;
-	t.append(0);
-	LinkedList<int> u;
-	u.append(0);
-	LinkedList<int> v;
-	v.append(0);
-	LinkedList<int> w;
-	w.append(0);
-	LinkedList<int> x;
-	x.append(0);
-	LinkedList<int> y;
-	y.append(0);
-	LinkedList<int> z;
-	z.append(0);
-	LinkedList<int> temp1;
-	LinkedList<int> temp2;
-
-	//LinkedList<int>* first = &a;
-	//LinkedList<int>* last = &z;
-	//LinkedList<int>* current = &a;
-
-	bool validate;
-	string inputString;
-	string destination;
-	string source1;
-	string source2;
-	string op;
-
-	while(1){
-		// Reset input values
-		inputString = "";
-		destination = "";
-		source1 = "";
-		source2 = "";
-		op = "";
-		// Get user input
-		cout << "Input string: ";
-		getline(cin, inputString);
-		// Validate string
-		validate = parseString(inputString, &destination, &source1, &source2, &op);
-		// Find integer values or register for first source value
-		switch(source1[0]){
-			case 'a': break;
-			case 'b': break;
-			case 'c': break;
-			case 'd': break;
-			case 'e': break;
-			case 'f': break;
-			case 'g': break;
-			case 'h': break;
-			case 'i': break;
-			case 'j': break;
-			case 'k': break;
-			case 'l': break;
-			case 'm': break;
-			case 'n': break;
-			case 'o': break;
-			case 'p': break;
-			case 'q': break;
-			case 'r': break;
-			case 's': break;
-			case 't': break;
-			case 'u': break;
-			case 'v': break;
-			case 'w': break;
-			case 'x': break;
-			case 'y': break;
-			case 'z': break;
-			default:
-				int size = source1.length();
-				int iterator = size - 1;
-				int ones, tens, hunds, thous, result;
-				while(size > 0){
-					if(size < 4){
-						switch(size){
-							case 3:
-								ones = source1[iterator] - '0';
-								iterator--; 
-								tens = (source1[iterator] - '0') * 10;
-								iterator--;
-								hunds = (source1[iterator] - '0') * 100;
-								iterator--;
-								result = hunds + tens + ones;
-								temp1.append(result);	
-								break;	
-							case 2:
-								ones = source1[iterator] - '0';
-								iterator--; 
-								tens = (source1[iterator] - '0') * 10;
-								iterator--; 
-								result = tens + ones;
-								temp1.append(result);
-								break;
-							case 1:
-								ones = source1[iterator] - '0';
-								iterator--; 
-								result = ones;
-								temp1.append(result);
-								break;
-						}
-						size = 0;
-					}
-					else{
-						//temp1.append(std::stoi(source1.substr(iterator, 4)));
-						ones = source1[iterator] - '0';
-						iterator--; 
-						tens = (source1[iterator] - '0') * 10;
-						iterator--;
-						hunds = (source1[iterator] - '0') * 100;
-						iterator--;
-						thous = (source1[iterator] - '0') * 1000;
-						iterator--;
-						result = thous + hunds + tens + ones;
-						temp1.append(result);
-						size -= 4;
-					}
-				}
-				temp1.printList();
-			}
-			
-		// Find integer values or register for second source value
-		switch(source2[0]){
-			case 'a': break;
-			case 'b': break;
-			case 'c': break;
-			case 'd': break;
-			case 'e': break;
-			case 'f': break;
-			case 'g': break;
-			case 'h': break;
-			case 'i': break;
-			case 'j': break;
-			case 'k': break;
-			case 'l': break;
-			case 'm': break;
-			case 'n': break;
-			case 'o': break;
-			case 'p': break;
-			case 'q': break;
-			case 'r': break;
-			case 's': break;
-			case 't': break;
-			case 'u': break;
-			case 'v': break;
-			case 'w': break;
-			case 'x': break;
-			case 'y': break;
-			case 'z': break;
-			default:
-				int size = source2.length();
-				int iterator = size - 1;
-				int ones, tens, hunds, thous, result;
-				while(size > 0){
-					if(size < 4){
-						switch(size){
-							case 3:
-								ones = source2[iterator] - '0';
-								iterator--; 
-								tens = (source2[iterator] - '0') * 10;
-								iterator--;
-								hunds = (source2[iterator] - '0') * 100;
-								iterator--;
-								result = hunds + tens + ones;
-								temp2.append(result);	
-								break;	
-							case 2:
-								ones = source2[iterator] - '0';
-								iterator--; 
-								tens = (source2[iterator] - '0') * 10;
-								iterator--; 
-								result = tens + ones;
-								temp2.append(result);
-								break;
-							case 1:
-								ones = source2[iterator] - '0';
-								iterator--; 
-								result = ones;
-								temp2.append(result);
-								break;
-						}
-						size = 0;
-					}
-					else{
-						//temp1.append(std::stoi(source1.substr(iterator, 4)));
-						ones = source2[iterator] - '0';
-						iterator--; 
-						tens = (source2[iterator] - '0') * 10;
-						iterator--;
-						hunds = (source2[iterator] - '0') * 100;
-						iterator--;
-						thous = (source2[iterator] - '0') * 1000;
-						iterator--;
-						result = thous + hunds + tens + ones;
-						temp2.append(result);
-						size -= 4;
-					}
-				}
-				temp2.printList();
-			}
-			
-		// Find destination register
-		switch(destination[0]){
-			case 'a': 
-				calculate(a, s1, s2, op);
-				break;
-			case 'b': 
-				calculate(b, s1, s2, op);
-				break;
-			case 'c': 
-				calculate(c, s1, s2, op);
-				break;
-			case 'd': 
-				calculate(d, s1, s2, op);
-				break;
-			case 'e': 
-				calculate(e, s1, s2, op);
-				break;
-			case 'f': 
-				calculate(f, s1, s2, op);
-				break;
-			case 'g': 
-				calculate(g, s1, s2, op);
-				break;
-			case 'h': 
-				calculate(h, s1, s2, op);
-				break;
-			case 'i': 
-				calculate(i, s1, s2, op);
-				break;
-			case 'j': 
-				calculate(j, s1, s2, op);
-				break;
-			case 'k': 
-				calculate(k, s1, s2, op);
-				break;
-			case 'l': 
-				calculate(l, s1, s2, op);
-				break;
-			case 'm': 
-				calculate(m, s1, s2, op);
-				break;
-			case 'n': 
-				calculate(n, s1, s2, op);
-				break;
-			case 'o':
-				calculate(o, s1, s2, op);
-				break;
-			case 'p': 
-				calculate(p, s1, s2, op);
-				break;
-			case 'q': 
-				calculate(q, s1, s2, op);
-				break;
-			case 'r': 
-				calculate(r, s1, s2, op);
-				break;
-			case 's': 
-				calculate(s, s1, s2, op);
-				break;
-			case 't': 
-				calculate(t, s1, s2, op);
-				break;
-			case 'u': 
-				calculate(u, s1, s2, op);
-				break;
-			case 'v': 
-				calculate(v, s1, s2, op);
-				break;
-			case 'w': 
-				calculate(w, s1, s2, op);
-				break;
-			case 'x': 
-				calculate(x, s1, s2, op);
-				break;
-			case 'y': 
-				calculate(y, s1, s2, op);
-				break;
-			case 'z': 
-				calculate(z, s1, s2, op);
-				break;
-		// Print values to be calculated
-		cout << "destination: " << destination << endl;
-		cout << "source 1: " << source1 << endl;
-		cout << "operator: " << op << endl;
-		cout << "source 2: " << source2 << endl;
-	}
-
-	return 0;
+void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op){
+	
 }
-		/*
-		if(!validate){
-
-		}
-		else{
-			int i = 0;
-			// Read first character for destination
-			destination = inputString[0];
-			i++;
-			// Check for whitespace
-			while(isspace(inputString[i])){
-				i++;
-			}
-			// Pass over = sign
-			i++;
-			// Check for whitespace
-			while(isspace(inputString[i])){
-				i++;
-			}
-			// Read register or integer
-			if(islower(inputString[i])){
-				source1 = inputString[i];
-				i++;
-			}
-			else if(isdigit(inputString[i])){
-				source1 = inputString[i];
-				i++;
-				while(isdigit(inputString[i])){
-					source1 += inputString[i];
-					i++;
-				}
-			}
-			// Check for whitespace
-			while(isspace(inputString[i])){
-				i++;
-			}
-			// Read operator
-			op = inputString[i];
-			i++;
-			// Check for whitespace
-			while(isspace(inputString[i])){
-				i++;
-			}
-			// Read register or integer
-			if(op == "^"){
-				source2 = inputString[i];
-				i++;
-				while(isdigit(inputString[i])){
-					source2 += inputString[i];
-					i++;
-				}
-			}
-			else{
-				if(islower(inputString[i])){
-					source2 = inputString[i];
-					i++;
-				}
-				else if(isdigit(inputString[i])){
-					source2 = inputString[i];
-					i++;
-					while(isdigit(inputString[i])){
-						source2 += inputString[i];
-						i++;
-					}
-				}
-			}
-		}
-		*/
