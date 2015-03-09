@@ -37,7 +37,7 @@ using namespace std;
 	template <typename E> int 		Link<E>::freeNodes = 0;
 	template <typename E> Link<E>* 	Link<E>::freeList = NULL;
 
-bool parseString(string input){
+bool parseString(string input, string *destination, string *source1, string *source2, string *op){
 	int size = input.length();
 	int i = 0;
 	// Read first character
@@ -45,6 +45,7 @@ bool parseString(string input){
 		cout << "variable expected" << endl;
 		return false;
 	}
+	*destination = input[0];
 	i++;
 	// Check for whitespace
 	while(isspace(input[i])){
@@ -63,12 +64,15 @@ bool parseString(string input){
 	// Read variable or number
 	while(1){
 		if(islower(input[i])){
+			*source1 = input[i];
 			i++;
 			break;
 		}
 		else if(isdigit(input[i])){
+			*source1 += input[i];
 			i++;
 			while(isdigit(input[i])){
+				*source1 += input[i];
 				i++;
 			}
 			break;
@@ -85,6 +89,7 @@ bool parseString(string input){
 	// Read operator
 	switch(input[i]){
 		case '+': case '-' : case '*' : case '^': 
+			*op = input[i];
 			break;
 		default : 
 			cout << "operator expected" << endl;
@@ -104,6 +109,7 @@ bool parseString(string input){
 		}
 		// Read integer
 		while(isdigit(input[i])){
+			*source2 += input[i];
 			i++;
 		}
 		// Check for end of line
@@ -121,22 +127,25 @@ bool parseString(string input){
 		}
 		// Read variable or number
 		while(1){
-			if(islower(input[i])){
-				i++;
-				break;
-			}
-			else if(isdigit(input[i])){
-				i++;
-				while(isdigit(input[i])){
-					i++;
-				}
-				break;
-			}
-			else{
-				cout << "variable or number expected" << endl;
-				return false;
-			}
+		if(islower(input[i])){
+			*source2 = input[i];
+			i++;
+			break;
 		}
+		else if(isdigit(input[i])){
+			*source2 += input[i];
+			i++;
+			while(isdigit(input[i])){
+				*source2 += input[i];
+				i++;
+			}
+			break;
+		}
+		else{
+			cout << "variable or number expected" << endl;
+			return false;
+		}
+	}
 		// Check for end of line
 		if(i < size){
 			cout << "end of line expected" << endl;
@@ -207,15 +216,22 @@ int main(){
 	//LinkedList<int>* current = &a;
 
 	bool validate;
-	string inputString = "";
-	string destination = "";
-	string source1 = "";
-	string source2 = "";
-	string op = "";
+	string inputString;
+	string destination;
+	string source1;
+	string source2;
+	string op;
+
 	while(1){
+		inputString = "";
+		destination = "";
+		source1 = "";
+		source2 = "";
+		op = "";
 		cout << "Input string: ";
 		getline(cin, inputString);
-		validate = parseString(inputString);
+		validate = parseString(inputString, &destination, &source1, &source2, &op);
+		/*
 		if(!validate){
 
 		}
@@ -282,6 +298,7 @@ int main(){
 				}
 			}
 		}
+		*/
 		cout << "destination: " << destination << endl;
 		cout << "source 1: " << source1 << endl;
 		cout << "operator: " << op << endl;
