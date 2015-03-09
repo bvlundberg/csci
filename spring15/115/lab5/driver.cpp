@@ -47,7 +47,9 @@ using namespace std;
 
 int main(){
 	Calculator c1;
-
+	Link<int>* d1 = c1.a.getHead(); 
+	Link<int>* s1 = c1.temp1.getHead();
+	Link<int>* s2 = c1.temp2.getHead();
 
 	bool validate;
 	string inputString;
@@ -69,20 +71,20 @@ int main(){
 		// Validate string
 		validate = c1.parseString(inputString, &destination, &source1, &source2, &op);
 		// Find integer values or register for first source value
-		c1.identifySource(c1.s1,source1);
+		s1 = c1.identifySource(source1, 1);
 		// Find integer values or register for second source value
-		c1.identifySource(c1.s2, source2);
+		s2 = c1.identifySource(source2, 2);
 		// Find destination register
-		c1.identifyDestination(c1.d1, destination);
+		d1 = c1.identifyDestination(destination);
 			
 		
 		
 		// Print values to be calculated
-		c1.calculate(c1.d1 -> getHead(), c1.s1 -> getHead(), c1.s2 -> getHead(), op);
-		cout << "destination: " << destination << endl;
-		cout << "source 1: " << source1 << endl;
+		c1.calculate(d1, s1, s2, op);
+		c1.printList(d1);
+		c1.printList(s1);
 		cout << "operator: " << op << endl;
-		cout << "source 2: " << source2 << endl;
+		c1.printList(s2);
 	}
 	return 0;
 }

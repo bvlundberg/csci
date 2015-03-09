@@ -36,9 +36,9 @@ class Calculator{
 		LinkedList<int> temp1;
 		LinkedList<int> temp2;
 
-		LinkedList<int>* d1;
-		LinkedList<int>* s1;
-		LinkedList<int>* s2;
+		//LinkedList<int>* d1;
+		//LinkedList<int>* s1;
+		//LinkedList<int>* s2;
 
 		Calculator(){
 			a.append(0);
@@ -68,9 +68,9 @@ class Calculator{
 			y.append(0);
 			z.append(0);
 
-			LinkedList<int>* d1 = &(a);
-			LinkedList<int>* s1 = &(temp1);
-			LinkedList<int>* s2 = &(temp2);
+			//LinkedList<int>* d1 = &(a);
+			//LinkedList<int>* s1 = &(temp1);
+			//LinkedList<int>* s2 = &(temp2);
 		}
 	bool parseString(string input, string *destination, string *source1, string *source2, string *op){
 		int size = input.length();
@@ -194,7 +194,8 @@ class Calculator{
 
 	}
 
-	void identifySource(LinkedList<int>* source, string value){
+	Link<int>* identifySource(string value, int temp){
+		LinkedList<int>* source;
 		switch(value[0]){
 				case 'a': 
 					source = &a;
@@ -275,6 +276,13 @@ class Calculator{
 					source = &z;
 					break;
 				default:
+					if(temp == 1){
+						source = &temp1;
+					}
+					else{
+						source = &temp2;
+					}
+					source -> clear();
 					int size = value.length();
 					int iterator = size - 1;
 					int ones, tens, hunds, thous, result;
@@ -289,7 +297,7 @@ class Calculator{
 									hunds = (value[iterator] - '0') * 100;
 									iterator--;
 									result = hunds + tens + ones;
-									temp1.append(result);	
+									source -> append(result);	
 									break;	
 								case 2:
 									ones = value[iterator] - '0';
@@ -297,19 +305,19 @@ class Calculator{
 									tens = (value[iterator] - '0') * 10;
 									iterator--; 
 									result = tens + ones;
-									temp1.append(result);
+									source -> append(result);
 									break;
 								case 1:
 									ones = value[iterator] - '0';
 									iterator--; 
 									result = ones;
-									temp1.append(result);
+									source -> append(result);
 									break;
 							}
 							size = 0;
 						}
 						else{
-							//temp1.append(std::stoi(value.substr(iterator, 4)));
+							//source.append(std::stoi(value.substr(iterator, 4)));
 							ones = value[iterator] - '0';
 							iterator--; 
 							tens = (value[iterator] - '0') * 10;
@@ -319,93 +327,104 @@ class Calculator{
 							thous = (value[iterator] - '0') * 1000;
 							iterator--;
 							result = thous + hunds + tens + ones;
-							temp1.append(result);
+							source -> append(result);
 							size -= 4;
 						}
 					}
-					temp1.printList();
 				}
+				return source -> getHead();
 	}
-	void identifyDestination(LinkedList<int>* destination, string value){
+	Link<int>* identifyDestination(string value){
+		LinkedList<int>* destination;
 		switch(value[0]){
-				case 'a': 
-					destination = &a;
-					break;
-				case 'b': 
-					destination = &b;
-					break;
-				case 'c': 
-					destination = &c;
-					break;
-				case 'd': 
-					destination = &d;
-					break;
-				case 'e': 
-					break;
-				case 'f': 
-					destination = &f;
-					break;
-				case 'g': 
-					destination = &g;
-					break;
-				case 'h': 
-					destination = &h;
-					break;
-				case 'i': 
-					destination = &i;
-					break;
-				case 'j': 
-					destination = &j;
-					break;
-				case 'k': 
-					destination = &k;
-					break;
-				case 'l': 
-					destination = &l;
-					break;
-				case 'm': 
-					destination = &m;
-					break;
-				case 'n': 
-					destination = &n;
-					break;
-				case 'o':
-					destination = &o;
-					break;
-				case 'p': 
-					destination = &p;
-					break;
-				case 'q': 
-					destination = &q;
-					break;
-				case 'r': 
-					destination = &r;
-					break;
-				case 's': 
-					destination = &s;
-					break;
-				case 't': 
-					destination = &t;
-					break;
-				case 'u': 
-					destination = &u;
-					break;
-				case 'v': 
-					destination = &v;
-					break;
-				case 'w': 
-					destination = &w;
-					break;
-				case 'x': 
-					destination = &x;
-					break;
-				case 'y': 
-					destination = &y;
-					break;
-				case 'z': 
-					destination = &z;
-					break;
-				}
+			case 'a': 
+				destination = &a;
+				break;
+			case 'b': 
+				destination = &b;
+				break;
+			case 'c': 
+				destination = &c;
+				break;
+			case 'd': 
+				destination = &d;
+				break;
+			case 'e': 
+				break;
+			case 'f': 
+				destination = &f;
+				break;
+			case 'g': 
+				destination = &g;
+				break;
+			case 'h': 
+				destination = &h;
+				break;
+			case 'i': 
+				destination = &i;
+				break;
+			case 'j': 
+				destination = &j;
+				break;
+			case 'k': 
+				destination = &k;
+				break;
+			case 'l': 
+				destination = &l;
+				break;
+			case 'm': 
+				destination = &m;
+				break;
+			case 'n': 
+				destination = &n;
+				break;
+			case 'o':
+				destination = &o;
+				break;
+			case 'p': 
+				destination = &p;
+				break;
+			case 'q': 
+				destination = &q;
+				break;
+			case 'r': 
+				destination = &r;
+				break;
+			case 's': 
+				destination = &s;
+				break;
+			case 't': 
+				destination = &t;
+				break;
+			case 'u': 
+				destination = &u;
+				break;
+			case 'v': 
+				destination = &v;
+				break;
+			case 'w': 
+				destination = &w;
+				break;
+			case 'x': 
+				destination = &x;
+				break;
+			case 'y': 
+				destination = &y;
+				break;
+			case 'z': 
+				destination = &z;
+				break;
+			}
+			return destination -> getHead();
 	}
 
+	void printList(Link<int> *reg){
+	    	Link<int> *iterator = reg -> next;
+	    	cout << "Values in the list: ";
+	    	while(iterator -> next != NULL){
+	    		cout << iterator -> element << " ";
+	    		iterator = iterator -> next;
+	    	}
+	    	cout << endl;
+	}
 };
