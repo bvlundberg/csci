@@ -190,7 +190,7 @@ class Calculator{
 		return true;
 	}
 
-	Link<int>* identifySource(string value, int temp){
+	LinkedList<int>* identifySource(string value, int temp){
 		LinkedList<int>* source;
 		switch(value[0]){
 				case 'a': 
@@ -328,9 +328,9 @@ class Calculator{
 						}
 					}
 				}
-				return source -> getHead();
+				return source;
 	}
-	Link<int>* identifyDestination(string value){
+	LinkedList<int>* identifyDestination(string value){
 		LinkedList<int>* destination;
 		switch(value[0]){
 			case 'a': 
@@ -411,19 +411,21 @@ class Calculator{
 				destination = &z;
 				break;
 			}
-			return destination -> getHead();
+			return destination;
 	}
 
-	void printList(Link<int> *reg){
-	    	Link<int> *iterator = reg -> next;
+	void printList(LinkedList<int> *reg){
+	    	Link<int> *iterator = reg -> getHead() -> next;
+	    	Link<int> *tail = reg -> getTail();
 	    	cout << "Values in the list: ";
-	    	while(iterator -> next != NULL){
+	    	while(iterator != tail){
 	    		cout << iterator -> element << " ";
 	    		iterator = iterator -> next;
 	    	}
 	    	cout << endl;
 	}
-	void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op){
+	void calculate(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2, string op){
+		destination -> clear();
 		switch(op[0]){
 			case '+': 
 				addition(destination, source1, source2);
@@ -440,62 +442,89 @@ class Calculator{
 		}
 	}
 
-	void addition(Link<int> *destination, Link<int> *source1, Link<int> *source2){
-		source1 = source1 -> next;
-		source2 = source2 -> next;
+	void addition(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
+		Link<int>* sourceLink1 = source1 -> getHead() -> next;
+		Link<int>* sourceLink2 = source2 -> getHead() -> next;
+		Link<int>* tail1 = source1 -> getTail();
+		Link<int>* tail2 = source2 -> getTail();
 		int carry = 0;
 		int result = 0;
 		while(1){
-			if(source1 -> next == NULL && source2 -> next == NULL){
+			if(sourceLink1 == tail1 && sourceLink2 == tail2){
+				if(carry != 0){
+					destination -> append(carry);
+				}
 				break;
 			}
-			else if(source1 -> next != NULL && source2 -> next != NULL){
-				// calculate source1 + source 2 + carry
-				result = source1 -> element + source2 -> element + carry;
+			else if(sourceLink1 != tail1 && sourceLink2 != tail2){
+				// calculate sourceLink1 + source 2 + carry
+				result = sourceLink1 -> element + sourceLink2 -> element + carry;
 				// append to the destination register
+				if(result >= 10000){
+					destination -> append(result % 10000);
+				}
+				else{
+					destination -> append(result);
+				}
 				// find carry value
-				carry = result % 1000;
+				carry = result / 10000;
 				// go to next links
-				source1 = source1 -> next;
-				source2 = source2 -> next;
+				sourceLink1 = sourceLink1 -> next;
+				sourceLink2 = sourceLink2 -> next;
 
 			}
-			else if(source1 -> next != NULL){
-				// calculate source1 + carry
-				result = source1 -> element + carry;
+			else if(sourceLink1 != tail1){
+				// calculate sourceLink1 + carry
+				result = sourceLink1 -> element + carry;
 				// append to the destination register
+				if(result >= 10000){
+					destination -> append(result % 10000);
+				}
+				else{
+					destination -> append(result);
+				}
 				// find carry value
-				carry = result % 1000;
+				carry = result / 10000;
 				// go to next link
-				source1 = source1 -> next;
+				sourceLink1 = sourceLink1 -> next;
 			}
 			else{
-				// calculate source2 + carry
-				result = source2 -> element + carry;
+				// calculate sourceLink2 + carry
+				result = sourceLink2 -> element + carry;
 				// append to the destination register
+				if(result >= 10000){
+					destination -> append(result % 10000);
+				}
+				else{
+					destination -> append(result);
+				}
 				// find carry value
-				carry = result % 1000;
+				carry = result / 10000;
 				// go to next link
-				source2 = source2 -> next;
+				sourceLink2 = sourceLink2 -> next;
 			}
 	    }
 	    return;
 	}
-	void subtraction(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+	void subtraction(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
 		
 	}
-	void multiply(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+	void multiply(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
 		
 	}
-	int exponential(Link<int> *destination, Link<int> *source1, Link<int> *source2){
-        if(source2 -> element == 1){
-        	return source1 -> element;
+	int exponential(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
+		/*
+		Link<int>* sourceLink1 = source1 -> getHead() -> next;
+		Link<int>* sourceLink2 = source2 -> getHead() -> next;
+        if(sourceLink2 -> element == 1){
+        	return sourceLink1 -> element;
         }
-        else if(source2 -> element % 2 == 1){
-        	return exponential(destination, source1, (source2 -> element) / 2) * source1 -> element;
+        else if(sourceLink2 -> element % 2 == 1){
+        	return exponential(destination, source1, (sourceLink2 -> element) / 2) * sourceLink1 -> element;
         }
         else{
-        	return exponential(destination, source1, (source2 -> element) / 2);
+        	return exponential(destination, sourceLink1, (sourceLink2 -> element) / 2);
         }
+        */
 	}
 };

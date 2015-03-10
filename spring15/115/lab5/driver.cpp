@@ -44,9 +44,9 @@ using namespace std;
 
 int main(){
 	Calculator c1;
-	Link<int>* d1 = c1.a.getHead(); 
-	Link<int>* s1 = c1.temp1.getHead();
-	Link<int>* s2 = c1.temp2.getHead();
+	LinkedList<int>* d1 = &(c1.a); 
+	LinkedList<int>* s1 = &(c1.temp1);
+	LinkedList<int>* s2 = &(c1.temp2);
 
 	bool validate;
 	string inputString;
