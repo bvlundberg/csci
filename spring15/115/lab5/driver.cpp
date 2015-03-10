@@ -40,9 +40,6 @@ using namespace std;
 	template <typename E> int 		Link<E>::freeNodes = 0;
 	template <typename E> Link<E>* 	Link<E>::freeList = NULL;
 
-//bool parseString(string input, string *destination, string *source1, string *source2, string *op);
-//void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op);
-
 
 
 int main(){

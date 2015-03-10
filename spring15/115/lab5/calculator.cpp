@@ -190,10 +190,6 @@ class Calculator{
 		return true;
 	}
 
-	void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op){
-
-	}
-
 	Link<int>* identifySource(string value, int temp){
 		LinkedList<int>* source;
 		switch(value[0]){
@@ -426,5 +422,80 @@ class Calculator{
 	    		iterator = iterator -> next;
 	    	}
 	    	cout << endl;
+	}
+	void calculate(Link<int> *destination, Link<int> *source1, Link<int> *source2, string op){
+		switch(op[0]){
+			case '+': 
+				addition(destination, source1, source2);
+				break;
+			case '-' :
+				subtraction(destination, source1, source2);
+				break;
+			case '*' :
+				multiply(destination, source1, source2);
+				break;
+			case '^':
+				exponential(destination, source1, source2); 
+				break;
+		}
+	}
+
+	void addition(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+		source1 = source1 -> next;
+		source2 = source2 -> next;
+		int carry = 0;
+		int result = 0;
+		while(1){
+			if(source1 -> next == NULL && source2 -> next == NULL){
+				break;
+			}
+			else if(source1 -> next != NULL && source2 -> next != NULL){
+				// calculate source1 + source 2 + carry
+				result = source1 -> element + source2 -> element + carry;
+				// append to the destination register
+				// find carry value
+				carry = result % 1000;
+				// go to next links
+				source1 = source1 -> next;
+				source2 = source2 -> next;
+
+			}
+			else if(source1 -> next != NULL){
+				// calculate source1 + carry
+				result = source1 -> element + carry;
+				// append to the destination register
+				// find carry value
+				carry = result % 1000;
+				// go to next link
+				source1 = source1 -> next;
+			}
+			else{
+				// calculate source2 + carry
+				result = source2 -> element + carry;
+				// append to the destination register
+				// find carry value
+				carry = result % 1000;
+				// go to next link
+				source2 = source2 -> next;
+			}
+	    }
+	    return;
+	}
+	void subtraction(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+		
+	}
+	void multiply(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+		
+	}
+	int exponential(Link<int> *destination, Link<int> *source1, Link<int> *source2){
+        if(source2 -> element == 1){
+        	return source1 -> element;
+        }
+        else if(source2 -> element % 2 == 1){
+        	return exponential(destination, source1, (source2 -> element) / 2) * source1 -> element;
+        }
+        else{
+        	return exponential(destination, source1, (source2 -> element) / 2);
+        }
 	}
 };
