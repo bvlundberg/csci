@@ -507,7 +507,94 @@ class Calculator{
 	    return;
 	}
 	void subtraction(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
-		
+		Link<int>* sourceLink1 = source1 -> getHead() -> next;
+		Link<int>* sourceLink2 = source2 -> getHead() -> next;
+		Link<int>* tail1 = source1 -> getTail();
+		Link<int>* tail2 = source2 -> getTail();
+		int carry = 0;
+		int result = 0;
+		while(1){
+			cout << "Begin" << endl;
+			cout << "Link 1:"  << sourceLink1 -> element << endl;
+			cout << "Link 2: " << sourceLink2 -> element << endl;
+			cout << "Carry: " << carry << endl;
+			if(sourceLink1 == tail1 && sourceLink2 == tail2){
+				cout << "Case 1" << endl;
+				if(carry != 0){
+					destination -> clear();
+					destination -> append(0);
+				}
+				break;
+			}
+			else if(sourceLink1 != tail1 && sourceLink2 != tail2){
+				cout << "Case 2" << endl;
+				int temp = sourceLink1 -> element;
+				// Case where carry is not 0
+				if(carry != 0){
+					// subtract 1 from source link 1
+					temp--;
+				}
+				// Case where source link 1 is greater than or equal to source link 2
+				if(temp >= sourceLink2 -> element){
+					// Subtract source link 2 from source link 1
+					result = temp - sourceLink2 -> element;
+					// append result to destination
+					destination -> append(result);
+					cout << "Result: " << result << endl;
+					// set carry to 0
+					carry = 0;
+				}
+				else{
+					// Carry from next node
+					temp += 10000;
+					// subtract source link 2 from source link 1
+					result = temp - sourceLink2 -> element;
+					// append result to destination
+					destination -> append(result);
+					cout << "Result: " << result << endl;
+					// set carry to 1
+					carry = 1;
+				}
+				// go to next links
+				sourceLink1 = sourceLink1 -> next;
+				sourceLink2 = sourceLink2 -> next;
+
+			}
+			else if(sourceLink1 != tail1){
+				cout << "Case 3" << endl;
+				int temp = sourceLink1 -> element;
+				// Case where carry is not zero
+				if(carry == 0){
+					destination -> append(temp);
+				}
+				else{
+					if(temp == 0){
+						temp = 9999;
+						destination -> append(temp);
+					}
+					else{
+						temp--;
+						carry = 0;
+						if(temp != 0){
+							destination -> append(temp);
+						}
+					}
+				}
+				sourceLink1 = sourceLink1 -> next;
+
+			}
+			else{
+				cout << "Case 4" << endl;
+				destination -> clear();
+				destination -> append(0);
+				break;
+			}
+			cout << "End" << endl;
+			cout << "Link 1:"  << sourceLink1 -> element << endl;
+			cout << "Link 2: " << sourceLink2 -> element << endl;
+			cout << "Carry: " << carry << endl << endl;
+	    }
+	    return;
 	}
 	void multiply(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
 		

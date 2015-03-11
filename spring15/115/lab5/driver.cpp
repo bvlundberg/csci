@@ -67,21 +67,21 @@ int main(){
 		getline(cin, inputString);
 		// Validate string
 		validate = c1.parseString(inputString, &destination, &source1, &source2, &op);
-		// Find integer values or register for first source value
-		s1 = c1.identifySource(source1, 1);
-		// Find integer values or register for second source value
-		s2 = c1.identifySource(source2, 2);
-		// Find destination register
-		d1 = c1.identifyDestination(destination);
-			
+		if(validate){
+			// Find integer values or register for first source value
+			s1 = c1.identifySource(source1, 1);
+			// Find integer values or register for second source value
+			s2 = c1.identifySource(source2, 2);
+			// Find destination register
+			d1 = c1.identifyDestination(destination);
+			// Print values to be calculated
+			c1.calculate(d1, s1, s2, op);
+			c1.printList(d1);
+			c1.printList(s1);
+			cout << "operator: " << op << endl;
+			c1.printList(s2);
+		}
 		
-		
-		// Print values to be calculated
-		c1.calculate(d1, s1, s2, op);
-		c1.printList(d1);
-		c1.printList(s1);
-		cout << "operator: " << op << endl;
-		c1.printList(s2);
 	}
 	return 0;
 }
