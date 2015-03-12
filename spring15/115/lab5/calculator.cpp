@@ -514,12 +514,14 @@ class Calculator{
 		int carry = 0;
 		int result = 0;
 		while(1){
+			/*
 			cout << "Begin" << endl;
 			cout << "Link 1:"  << sourceLink1 -> element << endl;
 			cout << "Link 2: " << sourceLink2 -> element << endl;
 			cout << "Carry: " << carry << endl;
+			*/
 			if(sourceLink1 == tail1 && sourceLink2 == tail2){
-				cout << "Case 1" << endl;
+				//cout << "Case 1" << endl;
 				if(carry != 0){
 					destination -> clear();
 					destination -> append(0);
@@ -527,7 +529,7 @@ class Calculator{
 				break;
 			}
 			else if(sourceLink1 != tail1 && sourceLink2 != tail2){
-				cout << "Case 2" << endl;
+				//cout << "Case 2" << endl;
 				int temp = sourceLink1 -> element;
 				// Case where carry is not 0
 				if(carry != 0){
@@ -540,7 +542,7 @@ class Calculator{
 					result = temp - sourceLink2 -> element;
 					// append result to destination
 					destination -> append(result);
-					cout << "Result: " << result << endl;
+					//cout << "Result: " << result << endl;
 					// set carry to 0
 					carry = 0;
 				}
@@ -551,7 +553,7 @@ class Calculator{
 					result = temp - sourceLink2 -> element;
 					// append result to destination
 					destination -> append(result);
-					cout << "Result: " << result << endl;
+					//cout << "Result: " << result << endl;
 					// set carry to 1
 					carry = 1;
 				}
@@ -561,7 +563,7 @@ class Calculator{
 
 			}
 			else if(sourceLink1 != tail1){
-				cout << "Case 3" << endl;
+				//cout << "Case 3" << endl;
 				int temp = sourceLink1 -> element;
 				// Case where carry is not zero
 				if(carry == 0){
@@ -584,20 +586,65 @@ class Calculator{
 
 			}
 			else{
-				cout << "Case 4" << endl;
+				//cout << "Case 4" << endl;
 				destination -> clear();
 				destination -> append(0);
 				break;
 			}
+			/*
 			cout << "End" << endl;
 			cout << "Link 1:"  << sourceLink1 -> element << endl;
 			cout << "Link 2: " << sourceLink2 -> element << endl;
 			cout << "Carry: " << carry << endl << endl;
+			*/
 	    }
 	    return;
 	}
 	void multiply(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
+		Link<int>* sourceLink1 = source1 -> getHead() -> next;
+		Link<int>* sourceLink2 = source2 -> getHead() -> next;
+		Link<int>* destLink = destination -> getHead() -> next;
+		Link<int>* tail1 = source1 -> getTail();
+		Link<int>* tail2 = source2 -> getTail();
+		Link<int>* tailDest = destination ->getTail();
+		int temp = 0;
+		int carry = 0;
+		int result = 0;
 		
+		while(sourceLink2 != tail2){
+			while(sourceLink1 != tail1){
+				temp = (sourceLink1 -> element * sourceLink2 -> element) + carry;
+				carry = temp / 10000;
+				result = temp % 10000;
+				if(destLink != tailDest){
+					temp = destLink -> element + result;
+					carry = temp / 10000;
+					result = temp % 10000;
+					destLink -> element = result;
+				}
+				else{
+					destination -> append(result);
+				}
+				sourceLink1 = sourceLink1 -> next;
+			}
+			sourceLink1 = source1 -> getHead() -> next;
+			sourceLink2 = sourceLink2 -> next;
+			destLink = destLink -> next;
+			while(carry != 0){
+				if(destLink != tailDest){
+					temp = destLink -> element + carry;
+					carry = temp / 10000;
+					result = temp % 10000;
+					destLink -> element = result;
+				}
+				else{
+					destination -> append(carry);
+					carry = 0;
+				}
+			}
+			result = 0;
+			temp = 0;
+		}
 	}
 	int exponential(LinkedList<int> *destination, LinkedList<int> *source1, LinkedList<int> *source2){
 		/*
