@@ -4,5 +4,8 @@ runtime: go
 api_version: go1
 
 handlers:
-- url: /*
+- url: /.*
   script: _go_app
+
+ enabled_rewriters:
+  - MinifyCss
