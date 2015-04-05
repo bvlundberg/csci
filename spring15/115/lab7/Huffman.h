@@ -1,7 +1,7 @@
 // Huffman tree node abstract base class
 template <typename E> class HuffNode {
 	public:
-		virtual ˜HuffNode() {} // Base destructor
+		virtual ~HuffNode() {} // Base destructor
 		virtual int weight() = 0; // Return frequency
 		virtual bool isLeaf() = 0; // Determine type
 		};
@@ -12,11 +12,10 @@ class LeafNode : public HuffNode<E> {
 		E it; // Value
 		int wgt; // Weight
 	public:
-		LeafNode(const E& val, int freq) // Constructor
-		{ it = val; wgt = freq; }
-		int weight() { return wgt; }
-		E val() { return it; }
-		bool isLeaf() { return true; }
+		LeafNode(const E& val, int freq); // Constructor
+		int weight();
+		E val();
+		bool isLeaf();
 		};
 
 template <typename E> // Internal node subclass
@@ -26,16 +25,19 @@ class IntlNode : public HuffNode<E> {
 		HuffNode<E>* rc; // Right child
 		int wgt; // Subtree weight
 	public:
-		IntlNode(HuffNode<E>* l, HuffNode<E>* r)
-			{ wgt = l->weight() + r->weight(); lc = l; rc = r; }
-		int weight() { return wgt; }
-		bool isLeaf() { return false; }
-		HuffNode<E>* left() const { return lc; }
-			void setLeft(HuffNode<E>* b)
-				{ lc = (HuffNode<E>*)b; }
-		HuffNode<E>* right() const { return rc; }
-		void setRight(HuffNode<E>* b)
-			{ rc = (HuffNode<E>*)b; }
+		IntlNode(HuffNode<E>* l, HuffNode<E>* r);
+		int weight();
+		bool isLeaf();
+		HuffNode<E>* left() const;
+		void setLeft(HuffNode<E>* b);
+		HuffNode<E>* right() const;
+		void setRight(HuffNode<E>* b);
+};
+
+template <typename E> 
+class minTreeComp{
+	public:
+		static bool prior(HuffNode<E>* e1, HuffNode<E>* e2);
 };
 
 template <typename E>
@@ -43,26 +45,15 @@ class HuffTree {
 	private:
 		HuffNode<E>* Root; // Tree root
 	public:
-	HuffTree(E& val, int freq) // Leaf constructor
-		{ Root = new LeafNode<E>(val, freq); }
+	HuffTree(E& val, int freq); // Leaf constructor
 	// Internal node constructor
-	HuffTree(HuffTree<E>* l, HuffTree<E>* r)
-		{ Root = new IntlNode<E>(l->root(), r->root()); }
-	˜HuffTree() {} // Destructor
-	HuffNode<E>* root() { return Root; } // Get root
-	int weight() { return Root->weight(); } // Root weight
+	HuffTree(HuffTree<E>* l, HuffTree<E>* r);
+	~HuffTree() {} // Destructor
+	HuffNode<E>* root();
+	int weight();
 };
 
-template <typename Comp>
-class minTreeComp {
-	private:
 
-	public:
-		bool prior(HuffNode<E>* e1, HuffNode<E>* e2){
-			return e1.weight() <= e2.weight();
-		}
-
-};
 
 // Build a Huffman tree from a collection of frequencies
 template <typename E> HuffTree<E>*
