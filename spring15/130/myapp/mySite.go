@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func init() {
+func main() {
 	http.HandleFunc("/", static)
 }
 
