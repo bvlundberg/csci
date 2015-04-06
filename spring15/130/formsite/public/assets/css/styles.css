@@ -1,0 +1,62 @@
+body{
+	background-color: black;
+}
+header{
+	margin: 0px;
+	text-align: center;
+	background-color: gray;
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 5em;
+    justify-content: space-around;
+}
+footer{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+	background-color: gray;
+}
+.verticalspacer{
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+.container {
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  	
+}
+.vert1,.vert2{
+	flex-direction: column;
+}
+.horz{
+	flex-direction: row;
+}
+.jumbotron{
+	height: 500px;
+	background: url(../images/diamondbacks.png) no-repeat;
+	background-size: cover;
+}
+
+@media(max-width: 800px){
+	.jumbotron{
+		height: 300px;
+		background: url(../images/kershaw.jpg) no-repeat;
+		background-size: cover;
+	}
+	.vert2{
+		flex-direction: row;
+	}
+}
