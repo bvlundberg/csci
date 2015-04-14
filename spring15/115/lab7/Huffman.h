@@ -1,3 +1,9 @@
+/*
+	Author:		Brandon Lundberg
+	File Name:	Huffman.h
+	Purpose:	Holds the abstract classes and functions for the Huffman coding
+	Date:		5 April 2015
+*/
 // Huffman tree node abstract base class
 template <typename E> class HuffNode {
 	public:

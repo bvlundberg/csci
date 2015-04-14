@@ -1,3 +1,16 @@
+/*
+	Author:		Brandon Lundberg
+	File Name:	driver.cpp
+	Purpose:	Driver for the Huffman Coding Tree examples
+	Date:		5 April 2015
+*/
+/*
+	Had some problems figuring out how to implement the template for minTreeComp
+	Program won't compile with any functions using the Huffman or heap class
+	, so they are all commented out.
+	I did my best to implement buildTree, encode, and decode functions
+	with what I had.
+*/
 #include <cstdlib>      /* printf, NULL */
 #include <string>
 #include <stdio.h>

@@ -1,3 +1,9 @@
+/*
+	Author:		Brandon Lundberg
+	File Name:	Huffman.cpp
+	Purpose:	Holds the implementation of the Huffman coding classes and function
+	Date:		5 April 2015
+*/
 #include "Heap.cpp"
 #include "Huffman.h"
 

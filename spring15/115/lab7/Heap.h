@@ -1,3 +1,9 @@
+/*
+	Author:		Brandon Lundberg
+	File Name:	Heap.h
+	Purpose:	Holds the abstract heap class
+	Date:		5 April 2015
+*/
 // Heap class
 
 template <typename E, typename Comp> class heap {

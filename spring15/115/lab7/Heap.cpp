@@ -1,3 +1,9 @@
+/*
+	Author:		Brandon Lundberg
+	File Name:	Heap.cpp
+	Purpose:	Holds the implementation of the heap class
+	Date:		5 April 2015
+*/
 #include "Heap.h"
 
 heap :: heap(E* h, int num, int max) // Constructor
