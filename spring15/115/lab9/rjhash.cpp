@@ -11,7 +11,7 @@
 using namespace std;
 #define HASHSIZE 4001
 
-int sfold(char* key) {
+int sfold(const char* key) {
 	unsigned int *lkey = (unsigned int *)key;
 	int intlength = strlen(key)/4;
 	unsigned int sum = 0;
@@ -60,10 +60,10 @@ class hashTable{
 		int size(){
 			return numElements;
 		}
-		void update(char *key){
+		void update(string key){
 			numProbes = 0;
 			updates[numElements]++;
-			int pos = sfold(key);
+			int pos = sfold(const_cast<char*>(key.c_str()));
 			if(array[pos] == NULL){
 				keyValue *kv = new keyValue();
 				kv -> m_key = key;
@@ -98,7 +98,7 @@ class hashTable{
 		int reset(){
 			curr = -1;
 		}
-		void next(char *key, int &value){
+		void next(string &key, int &value){
 			curr++;
 			while(curr != HASHSIZE && array[curr] == NULL){
 				curr++;
@@ -114,7 +114,7 @@ class hashTable{
 		}
 		void traverse(){
 			reset();
-			char *key;
+			string key;
 			int value;
 			while(curr != HASHSIZE){
 				next(key, value);
