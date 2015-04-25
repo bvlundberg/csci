@@ -8,6 +8,8 @@
 #include <cstring>
 #include <ctype.h>
 #include <string>
+#include <fstream>
+#include <iomanip>
 using namespace std;
 #define HASHSIZE 4001
 
@@ -60,28 +62,34 @@ class hashTable{
 		int size(){
 			return numElements;
 		}
-		void update(string key){
+		void update(const char *skey){
+			
 			numProbes = 0;
 			updates[numElements]++;
-			int pos = sfold(const_cast<char*>(key.c_str()));
+			int pos = sfold(skey);
+			string key = string(skey);
 			if(array[pos] == NULL){
 				keyValue *kv = new keyValue();
 				kv -> m_key = key;
 				kv -> m_occurences = 1;
 				array[pos] = kv;
 				numElements++;
-				//updates[pos] = 1;
 			}
 			else if(array[pos] -> m_key == key){
 				array[pos] -> m_occurences += 1;
 			}
 			else{
-				//next(&pos, key);
 				int i = 1;
 				numProbes++;
-				while(i < HASHSIZE - 1 && array[((pos + i) % HASHSIZE)] != NULL){
-					i++;
-					numProbes++;
+				while(i <= HASHSIZE && array[(pos + i) % HASHSIZE] != NULL){
+					if(array[(pos + i) % HASHSIZE] -> m_key == key){
+						array[pos] -> m_occurences += 1;
+						return;
+					}
+					else{
+						i++;
+						numProbes++;
+					}
 				}
 				pos += i;
 				keyValue *kv = new keyValue();
@@ -90,7 +98,10 @@ class hashTable{
 				array[pos] = kv;
 				cost[numElements] += numProbes;
 				numElements++;
+				
 			}
+			
+			
 		}
 		int probes(){
 			return numProbes;
@@ -127,13 +138,46 @@ class hashTable{
 
 int main(){
 	hashTable ht;
-	ht.update("A");
-	ht.update("B");
 
-	ht.traverse();
-	//cout << sfold("B");
-	cout << ht.array[65]->m_key << " " << ht.array[65]->m_occurences << endl;
-	cout << ht.array[66]->m_key << " " << ht.array[66]->m_occurences << endl;
+    ifstream file;
+    file.open ("RomeoAndJuliet.txt");
+    if (!file.is_open()) return 0;
 
+    string word;
+    while (file >> word){
+    	ht.update(const_cast<char*>(word.c_str()));
+	}
+	/*
+	ht.update("Brandon");
+	ht.update("Vincent");
+	ht.update("Lundberg");
+	ht.update("Brandon");
+	ht.update("Vincent");
+	ht.update("Lundberg");
+	*/
+	//ht.traverse();
+	for(int i = 1; i < HASHSIZE; i++){
+		
+		if(ht.updates[i] == 0){
+			if(ht.cost[i] != 0){
+				cout << "Divide by zero!" << endl << endl;
+				break;
+			}
+			else{
+				cout << "0.00,";	
+			}
+		}
+		else{
+			cout << setprecision(1) << float(ht.cost[i])/float(ht.updates[i]) << ",";
+		}
+
+	}
+	cout << endl;
+	cout << "Unique words" << ht.size() << endl;
+	/*
+	cout << sfold("and");
+	cout << ht.array[212] -> m_key << endl;
+	cout << ht.array[212] -> m_occurences << endl;
+	*/
 	return 0;
 }
