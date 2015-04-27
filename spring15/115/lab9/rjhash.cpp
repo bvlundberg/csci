@@ -133,12 +133,49 @@ class hashTable{
 			}
 			
 		}
+		/*
+		void swap(int x, int y){
+			keyValue *temp = array[x];
+			array[x] = array[y];
+			array[y] = temp; 
+		}
+		int findPivot(int i, int j){
+			return (i+j)/2;
+		}
+
+		int partition(int left, int right, keyValue *pivot){
+			while(left <= right){
+				while(array[left] -> m_occurences < pivot -> m_occurences){
+					left++;
+				}
+				while((right >= left) && (array[right] -> m_occurences >= pivot -> m_occurences)){
+					right--;
+				}
+				if(right > left){
+					swap(left++, right--);
+				}
+				return left;
+			}
+		}
+
+		void quickSort(int i, int j){
+		  int pivot = findPivot(i, j);
+		  swap(pivot, j); 
+		  int k = partition(i, j-1, array[j]);
+		  swap(k, j);                   
+		  if ((k-i) > 1) quickSort(i, k-1);
+		  if ((j-k) > 1) quickSort(k+1, j);
+			return;
+		}
+		*/
 
 };
 
+
+
 int main(){
 	hashTable ht;
-
+	// Read from file and update
     ifstream file;
     file.open ("RomeoAndJuliet.txt");
     if (!file.is_open()) return 0;
@@ -147,15 +184,7 @@ int main(){
     while (file >> word){
     	ht.update(const_cast<char*>(word.c_str()));
 	}
-	/*
-	ht.update("Brandon");
-	ht.update("Vincent");
-	ht.update("Lundberg");
-	ht.update("Brandon");
-	ht.update("Vincent");
-	ht.update("Lundberg");
-	*/
-	//ht.traverse();
+	// Generate csv
 	for(int i = 1; i < HASHSIZE; i++){
 		
 		if(ht.updates[i] == 0){
@@ -172,12 +201,13 @@ int main(){
 		}
 
 	}
+	// Unique words
 	cout << endl;
-	cout << "Unique words" << ht.size() << endl;
-	/*
-	cout << sfold("and");
-	cout << ht.array[212] -> m_key << endl;
-	cout << ht.array[212] -> m_occurences << endl;
-	*/
+	cout << "Unique words: " << ht.size() << endl;
+	// Sort for top occurances
+	hashTable htSorted;
+	htSorted = ht;
+	//htSorted.quickSort(0,HASHSIZE);
+
 	return 0;
 }
