@@ -3,8 +3,16 @@
 #include <cstring>
 #include <iostream>
 #include <string>
+#include <sys/wait.h> //for wait()
+#include <sys/time.h> //for macro GET_TIME(double)
 
 using namespace std;
+
+
+//macro (in-line expansion) for GET_TIME(double); needs <sys/time.h>
+#define GET_TIME(now)\
+{ struct timeval t; gettimeofday(&t, NULL);\
+  now = t.tv_sec + t.tv_usec/1000000.0; }
 
 int stringToInt(string input)
 {
@@ -76,32 +84,49 @@ int main()
 		pid = fork();
 		if(pid == 0 && i == 0)
 		{
-      int controllerinput, recursiveresult, iterativeresult;
+      int controllerinput;
+      double recursiveresult, iterativeresult;
       read(controller[0], &controllerinput, sizeof(int));
       write(recursive[1], &controllerinput, sizeof(int));
       write(iterative[1], &controllerinput, sizeof(int));
-      read(recursivefinish[0], &recursiveresult, sizeof(int));
-      read(iterativefinish[0], &iterativeresult, sizeof(int));
+      read(recursivefinish[0], &recursiveresult, sizeof(double));
+      read(iterativefinish[0], &iterativeresult, sizeof(double));
 
-      cout << "Recursive result: " << recursiveresult << endl;
-      cout << "Iterative result: " << iterativeresult << endl;
+      cout << "Recursive execution time: " << recursiveresult << endl;
+      cout << "Iterative execution time: " << iterativeresult << endl;
 			exit(0);
 		}
 		else if(pid == 0 && i == 1)
 		{
       int recursiveinput, recursiveanswer = 0;
+      double start_r, stop_r, executiontime_r;
       read(recursive[0], &recursiveinput, sizeof(int));
+      GET_TIME(start_r);
       recursiveanswer = fib_r(recursiveinput);
-      write(recursivefinish[1], &recursiveanswer, sizeof(int));
+      GET_TIME(stop_r);
+      executiontime_r = stop_r - start_r;
+      cout << "Recursive Result: " << recursiveanswer << endl;
+      write(recursivefinish[1], &executiontime_r, sizeof(double));
 			exit(0);
 		}
 		else if(pid == 0 && i == 2)
 		{
       int iterativeinput, iterativeanswer = 0;
+      double start_i, stop_i, executiontime_i;
       read(iterative[0], &iterativeinput, sizeof(int));
+      GET_TIME(start_i);
       iterativeanswer = fib_i(iterativeinput);
-      write(iterativefinish[1], &iterativeanswer, sizeof(int));
+      GET_TIME(stop_i);
+      executiontime_i = stop_i - start_i;
+      cout << "Iterative Result: " << iterativeanswer << endl;
+      write(iterativefinish[1], &executiontime_i, sizeof(double));
 			exit(0);
 		}
 	}
+
+  for(int i = 0; i < 3; i++)
+  {
+    pid = wait(&status);
+    cout << "Child with pid " << pid << " exited, status=" << status << endl;
+  }
 }
