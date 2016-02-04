@@ -1,0 +1,63 @@
+144 Quiz notes
+FIFO:
+	- do tasks in the order they arrive
+	- keep running a task until it is done
+	- advantages
+		- minimizes overhead, switching between tasks
+		- creates best throughput
+		- fairness
+	- disadvantages
+		- inefficient if big tasks lead the way
+SJF:
+	- when a shorter task arrives, do that one
+	- shortest = remaining time left on the task
+	- advantages
+		- minimize average response time
+	- disadvantages
+		- impossible to implement becausewe do not know
+			what will be arriving
+		- large variance in average response time (does longer tasks as slowly as possible)
+		- starvation
+		- context swithces
+RR:
+	- takes turns for a limited period of time
+	- sets a timer interrupt (time quantum) on each process
+	- advantages
+		- no starvation
+		- improves average response times
+		- fair
+	- disadvantages
+		- overhead of context switching
+		- delays to scheduling slows down I/O processes, I/O needs precedence to run smoothly
+Max/Min Fairness"
+	- maximizes the minimum allocation given to a particular process until all resources 	are assigned
+	- if all processes are complete bound, we give the same share of the processor
+Multi-level Feedback
+	- Responsiveness: Run short tasks quickly, as in SJF
+	- Low Overheard: Minimize the number of preemptiond, as in FIFO, and minimize the 		time spent making scheduling decisions
+	- Starvation-Freedom: All tasks should make progress, as in Round Robin
+	- Background Tasks: Defer system maintenance tasks, such as disk defragmentation, so 	they do not interfere with user work
+	- Fairness: Assign (non-background) processes approximately their max-min fair share 	of the processor
+	- multiple round robn queueswith different priority levels
+	- higher priorities have shorter time quantum
+	- ensures fairness (increase priority to get fair share)
+Little's Law
+	- the time average number of customers in a queueing system (l) is equal to the rate at which customers arrive and enter the system (lambda) multiplied by the average sojourn time of a customer (w), so l = lambda * w
+Paged vs Segmented
+	- Paged
+		- memory divided into fixed sized pages
+		- each page has a base physical address
+	- segmented
+		- memory is divided into variable length segments
+		- each segment has a base physical address + length
+	- advantages
+		- paging
+			- arrays that has space to grow w/o pre allocation (no defined allocation)
+			- no seperate protection
+			- no seperate compiling
+			- no shared code
+		- segmentation
+			- defined allocation
+			- seperate protection bits (execute disable, read-only, write-only, etc)
+			- seperate compiling
+			- shared code
