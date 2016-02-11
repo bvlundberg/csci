@@ -104,54 +104,6 @@ def depthFirstSearch(problem):
         result.append(x)
     reverse = result.reverse()
     return result
-"""
-    for s in problem.getSuccessors(problem.getStartState()):
-        successors.push(s)
-
-    while not successors.isEmpty():
-        s = successors.pop()
-        print s
-    return  result
-
-    movestack = util.Stack()
-    allmoves = util.Stack()
-    moves = util.Stack()
-    reverse = util.Stack()
-    result = []
-    visited = []
-    movestack.push(problem.getStartState())
-    while not movestack.isEmpty():
-        current = movestack.pop()                
-        if current not in visited:
-            visited.append(current)
-            print current
-            if not allmoves.isEmpty():
-                moves.push(allmoves.pop())
-            if problem.isGoalState(current):
-                break
-            allvisited = True
-            for i in problem.getSuccessors(current):
-                #print "Successor for ", current, ": ", i[1]
-                movestack.push(i[0])
-                allmoves.push(i[1])
-        for i in problem.getSuccessors(current):
-            if i[0] in visited:
-                allvisited &= True
-                #print i[0], "True"
-            else:
-                allvisited &= False
-                #print i[0], " False"
-        if allvisited:
-            m = moves.pop()
-
-    while not moves.isEmpty():
-        m = moves.pop()   
-        print m
-
-    print visited
-
-    return  result
-    """
 
 def dfs_rec(state, moves, visited, problem):
     if problem.isGoalState(state):
@@ -174,7 +126,39 @@ def dfs_rec(state, moves, visited, problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # Moves are the expanded states
+    # Each element in parent is the parent for the node and the direction to get to it from parent
+    # Visited is a list of the nodes visited
+    moves = util.Queue()
+    parents = {}
+    visited = []
+    # Start and stop points of the search
+    start = problem.getStartState()
+    goal = None
+    
+    root = (start, '', 0)
+    moves.push(root)
+    # Visit the initial node
+    visited.append(start)
+    while not moves.isEmpty():
+        curr = moves.pop()
+        # If destination is found
+        if problem.isGoalState(curr[0]):
+            goal = curr[0]
+            break
+        for s in problem.getSuccessors(curr[0]):
+            if s[0] not in visited:
+                moves.push(s)
+                # Visit node as it is enqueued, not dequeued (in case another node leads to it)
+                visited.append(s[0])
+                # set parent and direction to the current node in the parents list
+                parents[s[0]] = (curr[0], s[1])
+    result = []
+    this = goal
+    while this != start:
+        result = [parents[this][1]] + result
+        this = parents[this][0]
+    return result
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
