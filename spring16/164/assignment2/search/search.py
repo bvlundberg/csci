@@ -130,35 +130,28 @@ def breadthFirstSearch(problem):
     # Each element in parent is the parent for the node and the direction to get to it from parent
     # Visited is a list of the nodes visited
     moves = util.Queue()
-    parents = {}
     visited = []
     # Start and stop points of the search
     start = problem.getStartState()
-    goal = None
     
-    root = (start, '', 0)
+    root = (start, [])
     moves.push(root)
     # Visit the initial node
     visited.append(start)
     while not moves.isEmpty():
         curr = moves.pop()
+        print '\n', curr
         # If destination is found
         if problem.isGoalState(curr[0]):
-            goal = curr[0]
-            break
+            return curr[1]
         for s in problem.getSuccessors(curr[0]):
+            print s
             if s[0] not in visited:
-                moves.push(s)
+                moves.push((s[0], curr[1]+[s[1]]))
                 # Visit node as it is enqueued, not dequeued (in case another node leads to it)
                 visited.append(s[0])
-                # set parent and direction to the current node in the parents list
-                parents[s[0]] = (curr[0], s[1])
-    result = []
-    this = goal
-    while this != start:
-        result = [parents[this][1]] + result
-        this = parents[this][0]
-    return result
+
+    return []
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
