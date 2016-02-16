@@ -140,12 +140,10 @@ def breadthFirstSearch(problem):
     visited.append(start)
     while not moves.isEmpty():
         curr = moves.pop()
-        print '\n', curr
         # If destination is found
         if problem.isGoalState(curr[0]):
             return curr[1]
         for s in problem.getSuccessors(curr[0]):
-            print s
             if s[0] not in visited:
                 moves.push((s[0], curr[1]+[s[1]]))
                 # Visit node as it is enqueued, not dequeued (in case another node leads to it)
@@ -206,37 +204,29 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    parents = {}
-    moves = {}
     costs = {}
-    goal = None
     frontier = util.PriorityQueue()
 
     start = problem.getStartState()
-    frontier.push(start, 0)
-    costs[start] = 0
+    startstring = str(start)
+    print startstring
+    frontier.push((start, []), 0)
+    costs[startstring] = 0
 
 
     while not frontier.isEmpty():
-        curr = frontier.pop()
-        if problem.isGoalState(curr):
-            goal = curr
-            break
-        
-        for s in problem.getSuccessors(curr):
-            newcost = costs[curr] + s[2]
-            if s[0] not in costs or newcost < costs[s[0]]:
-                costs[s[0]] = newcost
-                newpriority = newcost + heuristic(s[0], problem)
-                frontier.push(s[0], newpriority)
-                parents[s[0]] = curr
-                moves[s[0]] = s[1]
-    result = []
-    this = goal
-    while this != start:
-        result = [moves[this]] + result
-        this = parents[this]
-    return result
+        node, moves = frontier.pop()
+        nodestring = str(node)
+        if problem.isGoalState(node):
+            return moves
+        for newnode, move, cost  in problem.getSuccessors(node):
+            newnodestring = str(newnode)
+            newcost = costs[nodestring] + cost
+            if newnodestring not in costs or newcost < costs[newnodestring]:
+                costs[newnodestring] = newcost
+                newpriority = newcost + heuristic(newnode, problem)
+                frontier.push((newnode, moves+[move] ), newpriority)
+    return []
 
 
 # Abbreviations
