@@ -1,0 +1,63 @@
+Card Classes
+Guard:
+	Eliminate
+	Survive
+Priest:
+	Acquire game information
+Baron:
+	Eliminate
+	Survive
+Handmaid:
+	Defensive
+Prince:
+	Eliminate
+King:
+	Acquire game information
+Countess:
+	Bluff
+Princess:
+	Don't commit suicide
+
+All Cards:
+	High Card
+
+
+Aggressive:
+	1. Suicide 		- 10000
+	2. Eliminate	- 80	
+	3. Assist		- 70
+	4. High Card 	- 40
+	5. Defensive	- 40
+	6. Survive		- 25
+	7. Bluff		- 15
+
+Defensive
+	1. Suicide 		- 10000
+	2. Defensive	- 80
+	3. Survive		- 80
+	4. High Card 	- 40
+	5. Eliminate	- 40
+	6. Assist		- 25
+	7. Bluff		- 15
+
+Don't Commit Suicide:
+	1. If holding the princess, 10000
+
+Eliminate:
+	1. Calculate percentages of eliminating each player
+	2. Decided which player to try to eliminate (threat to you - within 75% of top guess)
+	3. Multiply percentage by multiplier
+Assist:
+	1. If holding a king and an attack card, low return
+	2. If holding a king and there are a lot of attack cards remaining, high return
+	3. If holding a priest and attack card, high return
+	4. If holding a priest and non-attack card, middle return 
+High Card
+	1. Return percentage that my card is better than
+Defensive
+	1. Return 100 for handmaid
+Survive
+	1. High for guard
+	2. Low if someone knows the card
+	3. Low if your card is a high probability of the ones remaining
+	4. Percentage that your baron does not kill you
