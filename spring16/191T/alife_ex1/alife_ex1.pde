@@ -1,3 +1,16 @@
+/* Author: Brandon Lundberg
+
+The modifications made to the program are as follows:
+1. A police type was added to arrest predators
+2. The police and predators grow as they arrest/kill
+3. Police can only arrest predators that have killed less than or equal to the number of predators the police has arrested
+4. After a certain number of arrests, the police become corrupt and turn into predators
+5. Only prey are spawned automatically in the main program
+6. Predators do not die and spawn new prey. Instead, predators spawn more predators if they kill enough prey
+
+Somehow, all of my police get deleted at a certain time. I cannot quite figure out why, but enjoy the game!
+
+
 /* 
  * alife_ex1
  * A simple artificial life simulation, where predators are "attracted" (experience an attractive force) to their
@@ -12,10 +25,10 @@ long start_time = -1;
 long elapsed_time = 16666667;
 
 /* -----------------------------------------------------------------------------------------------------------------
+
  * Walls
  * Where are creatures not allowed to go?
  */
-
 class Wall {
   int x1,y1,x2,y2;
   boolean empty = false; // Does the wall occupy no space?
@@ -45,13 +58,27 @@ class Wall {
   // Draw the current wall
   void draw() {
     if(!empty) {
-      stroke(#dddddd);
-      fill(0);
+      noStroke();
+      noFill();
       rect(x1,y1,x2,y2);
     }
   }   
 }
 
+ class Jail {
+  int x1,y1,x2,y2;
+  boolean empty = false; // Does the wall occupy no space?
+  
+  Jail(int cx1, int cy1, int cx2, int cy2) {
+    x1 = cx1; y1 = cy1; x2 = cx2; y2 = cy2;
+  }
+  
+    void draw() {
+        fill(0,0,255);
+        rect(x1,y1,x2,y2);
+    } 
+  
+}
 
 /* -----------------------------------------------------------------------------------------------------------------
  * Entity management
@@ -80,12 +107,15 @@ void setup() {
   creatures = new LinkedList<Creature>();
   new_creatures = new LinkedList<Creature>();
   
+  Police p = new Police();
+  creatures.add(p);
+  
   // Add some random creatures
   for(int i = 0; i < 100; i++) 
     creatures.add(randomCreature());
-    
+   
   // Add the implicit window border walls
-  Wall[] newWalls = new Wall[walls.length + 4];
+  Wall[] newWalls = new Wall[walls.length + 5];
   for(int i = 0; i < walls.length; i++)
     newWalls[i] = walls[i];
   
@@ -93,9 +123,10 @@ void setup() {
   newWalls[walls.length+1] = new Wall(width,-50,width+50,height+50); // Right
   newWalls[walls.length+2] = new Wall(-50,-50,width+50,-1);          // Top
   newWalls[walls.length+3] = new Wall(-50,height,width+50,height+50);// Bottom
+  newWalls[walls.length+4] = new Wall(0,0,110,110); // Jail
   
   walls = newWalls; // Replace original walls.
-  
+  jail = new Jail(10, 10, 90, 90);
   nextSpawn = SPAWN_FREQUENCY;
   
   mySeed = 12;
@@ -128,8 +159,14 @@ void draw() {
   if(ccount + new_creatures.size() < MAX_CREATURES && timeSinceSpawn >= nextSpawn) {
     timeSinceSpawn -= nextSpawn;
     nextSpawn = random(0,2 * SPAWN_FREQUENCY);
-    spawn(randomCreature());
+    spawn(newPrey());
   }
+  
+  //rectMode(CENTER);
+  
+
+  // Add Jail cell
+  jail.draw();
   
   // Draw all walls
   for(Wall w : walls)
@@ -143,7 +180,7 @@ void draw() {
   // Purge any dead objects.
   for(Iterator<Creature> i = creatures.iterator(); i.hasNext(); ) {
     if(!i.next().alive)
-      i.remove();
+      //i.remove();
   }
   
   // Add new objects, and clear the new_entities list for the next frame
@@ -171,6 +208,31 @@ int chooseCreatureType() {
     cp += spawnFreq[++i];
 
   return i;
+}
+
+Creature newPrey() {
+  Creature c = creatureByType(0);
+  
+  c.x = 0; 
+  c.y = 0; 
+  float v = c.maxVelocity / 3;
+  c.vx = random(-v,+v) + random(-v,+v) + random(-v,+v); // Approximate Gaussian
+  c.vy = random(-v,+v) + random(-v,+v) + random(-v,+v);  
+  
+  // Find a random location not overlapping any walls
+  boolean overlaps;
+  do {
+    c.x = random(16,width-16); c.y = random(16,height-16);
+    
+    overlaps = false; 
+    for(Wall w : walls) 
+      if(intersects(w.x1,w.y1,w.x2,w.y2,(int)(c.x-c.radius),(int)(c.y-c.radius),(int)(c.x+c.radius),(int)(c.y+c.radius))) {
+        overlaps = true;
+        break;
+      }
+  } while(overlaps);
+  
+  return c;
 }
 
 // Create a new random creature, using the probabilities, and giving it a random
@@ -207,6 +269,13 @@ Creature randomCreature(float x, float y) {
 
 // Adjust velocity when colliding with the walls
 void collide(Creature c, float dt) {
+  if(c.x + c.vx*dt - c.radius < 100 && c.y + c.vy*dt - c.radius < 100)
+  {
+    if(c.x < c.y)
+      c.vy = abs(c.vy);
+    else
+      c.vx = abs(c.vx);
+  }
   if(c.x + c.vx*dt - c.radius < 0)
     c.vx = abs(c.vx);
   if(c.y + c.vy*dt - c.radius < 0)

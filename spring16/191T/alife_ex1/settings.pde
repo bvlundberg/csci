@@ -20,6 +20,7 @@ final int MAX_CREATURES = 300;
 // You can construct walls with
 //   new Wall(x1,y1.x2,y2);
 // "Empty" walls (with x1==x2 or y1==y2) will not be drawn or interacted with.
+Jail jail;
 Wall[] walls = {
   
 };

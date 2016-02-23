@@ -39,8 +39,25 @@ float[] spawnFreq = {
 void collide(Creature a, Creature b) {
   if(a.type == PREY && b.type == PREDATOR) {
     Predator p = (Predator)b;
-    if(a.kill()) 
-      p.health += 115;
+    if(a.kill())
+      p.killed++;
+      p.grown = true;
+  }
+  if(a.type == POLICE && b.type == PREDATOR) {
+     Police police = (Police)a;
+     Predator predator = (Predator)b;
+     if(police.arresting || predator.arrested){
+       return;
+     }
+     else
+     {
+       if(police.arrested >= predator.killed)
+       {
+         police.arresting = true;
+         predator.arrested = true;
+       }
+     }
+
   }
   // The collide loop tests every pair of creatures against each other, so the effects of a 
   // predator A and prey B will be handled automatically, you don't need to test for it. 
@@ -70,7 +87,7 @@ class Creature {
   boolean alive = true;
   
   // Display attributes
-  int radius = 4; 
+  float radius = 4; 
   color c = #dddddd; // Light gray. Each type should have a different color
   
   float maxVelocity = 0.1; // px/ms 
@@ -193,38 +210,32 @@ final int PREDATOR = 1;
 class Predator extends Creature {
   
   float health = 5000;
-
+  boolean arrested = false;
+  int killed = 0;
+  boolean grown = false;
   Predator() {
     type = PREDATOR;
     c = #bb2222;
     maxVelocity = 0.4; // Faster
-    health = irandom(4000,5100); // Add some variation to lifespan
+    health = 7000; // Add some variation to lifespan
   }  
   
   void simulate(float dt) {
     super.simulate(dt);
-    
-    health -= dt;
-    if(health < 0) {
-      if(kill()) {
-        // Spawn some new prey upon death
-        for(int i = 0; i < 10; i++) {
-          Prey c = new Prey();
-          c.x = x;
-          c.y = y;
-          c.vx = vx + random(-0.1,0.1);
-          c.vy = vy + random(-0.1,0.1);
-          c.maxVelocity = 0.2;
-          c.invul = 100;
-          spawn(c);
-        }
-      }
+    if(arrested){
+        bearrested(0, 0, .001);
+        return;
     }
-    else {
-      //maxVelocity = health / 10000;
-      
-      // Give birth to a child?
-      if(health > 5000) {        
+    if(grown && killed < 10)
+    {
+       radius = 4 * pow(1.1, killed);
+       grown = false;
+    }
+    health -= dt;      
+    if(killed > 10)
+    {
+      for(int i = 0; i < 2; i++)
+      {
         Predator c = new Predator(); 
         c.x = x;
         c.y = y;
@@ -232,19 +243,120 @@ class Predator extends Creature {
         c.vy = -vy;
         spawn(c);
       }
+      kill();
+    }
+    // Give birth to a child?
+    else if(health > 7000) {        
+      Predator c = new Predator(); 
+      c.x = x;
+      c.y = y;
+      c.vx = -vx;
+      c.vy = -vy;
+      spawn(c);
     }
   }
   
   void accelerate(float dt) {    
     for(Creature o : creatures) {
       if(o != this) {
-        if(o.type == PREY) 
+        if(o.type == PREY)          
           pursue(o,0.1); // Strong attraction
         else
           if(dist2(x,y,o.x,o.y) < 16*16) 
             flee(o,0.01); // Slight repulsion, if too close
       }
     }    
+  }
+  void bearrested(int xTarget, int yTarget, float strength) {
+    
+    // Find the vector pointing away from the target, and normalize it.
+    float dx = x - xTarget;
+    float dy = y - yTarget;
+    if(x < 110 && y < 110) {
+      arrested = false;
+      kill();
+      return;
+    }
+    vx = dx * -.001;
+    vy = dy * -.001;
+  }
+}
+
+final int POLICE = 2;
+class Police extends Creature {
+ 
+  boolean arresting = false;
+  boolean spawned = false;
+  int arrested = 0;
+  Police() {
+    type = POLICE;
+    c = #0000FF;
+    maxVelocity = 0.4; // Faster
+  }  
+  
+  void simulate(float dt) 
+  {
+    super.simulate(dt);
+    if(arrested % 5 == 0 && arrested > 0 && spawned == false)
+    {
+      Police p = new Police();
+      p.x = x;
+      p.y = y;
+      p.vx = vx + random(-0.1,0.1);
+      p.vy = vy + random(-0.1,0.1);
+      spawn(p);
+      spawned = true;
+    }
+    else if(arrested % 5 != 0)
+    {
+      spawned = false;
+    }
+    if(arrested > 10) {    
+      Predator c = new Predator(); 
+      c.x = x;
+      c.y = y;
+      c.vx = vx;
+      c.vy = vy;
+      c.radius = 4;
+      c.killed = 0;
+      c.health = 7000;
+      spawn(c);
+      kill();
+    }
+  }
+  
+  void accelerate(float dt) {
+    if(arresting){
+        makearrest(0, 0, .001);
+        return;
+    }
+    for(Creature o : creatures) {
+      if(o != this) {
+        if(o.type == PREDATOR && !((Predator)o).arrested && arrested >= ((Predator)o).killed) 
+          pursue(o,0.2); // Strong attraction
+        else
+          if(dist2(x,y,o.x,o.y) < 16*16) 
+            flee(o,0.01); // Slight repulsion, if too close
+      }
+    }    
+  }
+  
+    // Add a force to ax,ay to flee (be repelled by) the target creature
+  void makearrest(int xTarget, int yTarget, float strength) {
+    
+    // Find the vector pointing away from the target, and normalize it.
+    float dx = x - xTarget;
+    float dy = y - yTarget;
+    if(x < 110 && y < 110) {
+      arresting = false;
+      arrested++;
+      print(arrested, " ");
+      if (arrested < 10)
+        radius *= 1.1;
+      return;
+    }
+    vx = dx * -.001;
+    vy = dy * -.001;
   }
 }
   
