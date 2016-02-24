@@ -31,8 +31,8 @@ Coefficients:
 (Intercept)         Loss  
      2.1494       0.6083  
 
-> model <- lm(formula=Loss~Time)
-> model
+> fit <- lm(formula=Loss~Time)
+> fit
 
 Call:
 lm(formula = Loss ~ Time)
@@ -40,3 +40,25 @@ lm(formula = Loss ~ Time)
 Coefficients:
 (Intercept)         Time  
      -1.733        1.317
+
+Y = 1.317X - 1.733
+
+> summary(fit)
+
+Call:
+lm(formula = Loss ~ Time)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5333 -0.5625  0.3917  0.5458  0.7667 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -1.7333     1.1652  -1.488    0.168    
+Time          1.3167     0.2076   6.342 8.44e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.8041 on 10 degrees of freedom
+Multiple R-squared:  0.8009,	Adjusted R-squared:  0.781 
+F-statistic: 40.22 on 1 and 10 DF,  p-value: 8.437e-05
