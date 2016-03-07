@@ -209,7 +209,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     start = problem.getStartState()
     startstring = str(start)
-    print startstring
     frontier.push((start, []), 0)
     costs[startstring] = 0
 
@@ -225,6 +224,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             if newnodestring not in costs or newcost < costs[newnodestring]:
                 costs[newnodestring] = newcost
                 newpriority = newcost + heuristic(newnode, problem)
+                # print "Node: ", newnodestring, "Distance: ", heuristic(newnode, problem)
                 frontier.push((newnode, moves+[move] ), newpriority)
     return []
 

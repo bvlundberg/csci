@@ -395,7 +395,7 @@ def cornersHeuristic(state, problem):
         currentstate = closest
         if closest != None:
             restcorners.remove(closest)
-    return distance # Default to trivial solution
+    return total # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
@@ -487,10 +487,38 @@ def foodHeuristic(state, problem):
     Subsequent calls to this heuristic can access
     problem.heuristicInfo['wallCount']
     """
-    position, foodGrid = state
-    "*** YOUR CODE HERE ***"
-    return 0
 
+    "*** YOUR CODE HERE ***"
+    if problem.isGoalState(state):
+        return 0
+        
+    position, foodGrid = state
+    restoffood = list(foodGrid.asList())
+    total = 0
+    largest = 0
+    current = position
+    while restoffood:
+        closest = None
+        closestdist = 999999
+        distance = 0
+        for p in restoffood:
+            xy1 = current
+            xy2 = p
+            distance = abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+            if distance < closestdist:
+                closest = p
+                closestdist = distance
+            if distance > largest:
+                largest = distance
+        if current != position:
+            total += closestdist
+        current = closest
+        if closest != None:
+            restoffood.remove(closest)
+    if total - largest == 0:
+        return total
+    return total # Default to trivial solution
+    
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
     def registerInitialState(self, state):
@@ -520,7 +548,7 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return search.bfs(problem)
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -556,7 +584,15 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        restoffood = self.food.asList()
+        minfood = None
+        mindist = 99999
+        for p in restoffood:
+            dist = util.manhattanDistance(state, p)
+            if dist < mindist:
+                minfood = p
+                mindist = dist
+        return state == minfood
 
 def mazeDistance(point1, point2, gameState):
     """
