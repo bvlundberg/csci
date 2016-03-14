@@ -218,55 +218,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
 
         # Call recursive function initially
         return minimaxRec(gameState, self.depth, 0, True, True)
-        '''
-        def maxScore(gameState, depth):
-          if gameState.isWin() or gameState.isLose() or depth == 0:
-            return gameState.getScore()
-          legalMoves = gameState.getLegalActions(0)
-          maxscore = -99999
-          for move in legalMoves:
-            newState = gameState.generateSuccessor(0, move)
-            #print newState
-            newScore = minScore(newState, depth - 1)
-            if newScore > maxscore:
-              maxscore = newScore
-          return maxscore
-        def minScore(gameState, depth):
-          if gameState.isWin() or gameState.isLose() or depth == 0:
-            return gameState.getScore()
-          minscore = 99999
-          for i in range(1, gameState.getNumAgents()):
-            print i
-            legalMoves = gameState.getLegalActions(i)
-            for move in legalMoves:
-              newState = gameState.generateSuccessor(i, move)
-              #print newState
-              newScore = maxScore(newState, depth - 1)
-              if newScore < minscore:
-                minscore = newScore
-          return minscore
-        # Collect legal moves and successor states
-        if gameState.isWin() or gameState.isLose() or self.depth == 0:
-            return gameState.getScore()
-        legalMoves = gameState.getLegalActions(0)
-        action = None
-        #print legalMoves
-        numGhosts = gameState.getNumAgents() - 1
-        #print numGhosts
-        maxscore = -99999
-        newScore = 0
-        for move in legalMoves:
-          newState = gameState.generateSuccessor(0, move)
-          #print self.depth
-          newScore = minScore(newState, self.depth)
-          if newScore > maxscore:
-            maxscore = newScore
-            action = move
-          #print newState
-        # Choose one of the best actions
-
-        return action
-        '''
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
@@ -278,7 +229,65 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
           Returns the minimax action using self.depth and self.evaluationFunction
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        def abPruningRec(gameState, depth, alpha, beta, agent, isMax, isRoot):
+          # Base Case
+          if depth == 0 or gameState.isWin() or gameState.isLose():
+            return self.evaluationFunction(gameState)
+          # Get legal moves for the agent
+          legalMoves = gameState.getLegalActions(agent)
+          #PACMANS TURN
+          if isMax:
+            # Looking for best option (Max)
+            maxscore = -99999
+            newState = None
+            action = None
+            for move in legalMoves:
+              newState = gameState.generateSuccessor(agent, move)
+              # Recursive call with the same depth to the first ghost agent
+              value = abPruningRec(newState, depth, alpha, beta, 1, False, False)
+              # Set new max if applicable
+              if value > maxscore:
+                maxscore = value
+                action = move
+              # Evaluate alpha-beta conditions
+              if value > alpha:
+                alpha = value
+              # break loop
+              if beta < alpha:
+                break
+            # Return the correct move if at the root, otherwise the score at this depth
+            if isRoot:
+              return action
+            else:
+              return maxscore
+          # GHOST AGENTS TURN
+          else:
+            # Looking for worst option (Min)
+            minscore = 99999
+            newState = None
+            for move in legalMoves:
+              newState = gameState.generateSuccessor(agent, move)
+              # PACMAN IS NEXT
+              # Recursive call to get back to Pacman's turn
+              if (agent + 1) % gameState.getNumAgents() == 0:
+                value = abPruningRec(newState, depth - 1, alpha, beta, 0, True, False)
+              # ANOTHER GHOST AGENT IS NEXT
+              # Recursive call for next ghost's moves
+              else:
+                value = abPruningRec(newState, depth, alpha, beta, agent + 1, False, False)
+              # Set new min if applicable
+              if value < minscore:
+                minscore = value
+              # Evaluate alpha-beta conditions
+              if value < beta:
+                beta = value
+              # break loop
+              if beta < alpha:
+                break
+            return minscore 
+
+        # Call recursive function initially
+        return abPruningRec(gameState, self.depth, -99999, 99999, 0, True, True)
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
     """
