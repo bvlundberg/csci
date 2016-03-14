@@ -302,7 +302,53 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
           legal moves.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        def expectimaxRec(gameState, depth, agent, isMax, isRoot):
+          # Base Case
+
+          # Get legal moves for the agent
+          legalMoves = gameState.getLegalActions(agent)
+          #PACMANS TURN
+          if isMax:
+            if depth == 0 or gameState.isWin() or gameState.isLose():
+              return self.evaluationFunction(gameState)
+            # Looking for best option (Max)
+            maxscore = -99999
+            newState = None
+            action = None
+            for move in legalMoves:
+              newState = gameState.generateSuccessor(agent, move)
+              # Recursive call with the same depth to the first ghost agent
+              value = expectimaxRec(newState, depth, 1, False, False)
+              # Set new max if applicable
+              if value > maxscore:
+                maxscore = value
+                action = move
+            # Return the correct move if at the root, otherwise the score at this depth
+            if isRoot:
+              return action
+            else:
+              return maxscore
+          # GHOST AGENTS TURN
+          else:
+            if depth == 0 or gameState.isWin() or gameState.isLose():
+              return self.evaluationFunction(gameState)
+            # Looking for worst option (Min)
+            value = 0
+            newState = None
+            for move in legalMoves:
+              newState = gameState.generateSuccessor(agent, move)
+              # PACMAN IS NEXT
+              # Recursive call to get back to Pacman's turn
+              if (agent + 1) % gameState.getNumAgents() == 0:
+                value += expectimaxRec(newState, depth - 1, 0, True, False)
+              # ANOTHER GHOST AGENT IS NEXT
+              # Recursive call for next ghost's moves
+              else:
+                value += expectimaxRec(newState, depth, agent + 1, False, False)
+            return (float(value) / len(legalMoves))
+
+        # Call recursive function initially
+        return expectimaxRec(gameState, self.depth, 0, True, True)
 
 def betterEvaluationFunction(currentGameState):
     """
