@@ -1,0 +1,8 @@
+Assignment 4 Questions
+a.  Private Variables  - count, i (both are unique per thread)
+    Shared Variables   - a, n, temp (these values are used and needed for each thread)
+    
+b. No, there are no loop dependencies. Variable i is assigned by the for loop. Variable count is unique per thread and always starts at 0. Array a and variable n are basically used as read only (non changing). Array temp is only updated in one location per thread. None of the operations are dependent of each other.
+
+c. Yes. Threads could be designated to handle copying over elements of the array from the for loop, either in the form of blocks or rotationally like we have discussed in class.
+
